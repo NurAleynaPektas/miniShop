@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
-
+import logo from "../img/TrendPick.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -9,7 +9,9 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo}>BelVita</div>
+      <div className={styles.logo}>
+        <img src={logo} alt="TrendPick Logo" className={styles.logoImg} />
+      </div>
 
       <button className={styles.hamburger} onClick={toggleMenu}>
         <span className={isOpen ? styles.barActive : styles.bar}></span>

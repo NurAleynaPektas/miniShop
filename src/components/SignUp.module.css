@@ -38,13 +38,13 @@ input:focus {
   border-color: #4caf50;
 }
 
-button {
-  width: 60%;
+.signUpBtn {
+  width: 55%;
   padding: 10px;
   background-color: #4caf50;
   color: white;
   font-weight: bold;
-  margin-top: 40px ;
+  margin-top: 30px;
   margin-left: 50px;
   border: none;
   border-radius: 6px;
@@ -52,7 +52,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.signUpBtn:hover {
   background-color: #45a049;
 }
 

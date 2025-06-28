@@ -63,7 +63,9 @@ export default function SignUp() {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <button type="submit">Create Account</button>
+        <button className={styles.signUpBtn} type="submit">
+          Create Account
+        </button>
       </form>
     </div>
   );
