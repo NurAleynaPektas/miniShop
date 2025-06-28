@@ -1,43 +1,98 @@
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../api/productApi";
+import { useLocation } from "react-router-dom";
+import {
+  fetchProducts,
+  fetchCategories,
+  fetchProductsByCategory,
+} from "../api/productApi";
 import styles from "./Home.module.css";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const location = useLocation();
 
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // URL değiştiğinde search ve kategori sıfırlansın
   useEffect(() => {
-    const getData = async () => {
+    setSearchTerm("");
+    setSelectedCategory("all");
+  }, [location.pathname]);
+
+  // Kategori adı başlık için
+  const categoryName =
+    selectedCategory === "all"
+      ? "All Products"
+      : categories.find((cat) => cat.slug === selectedCategory)?.name ||
+        "Products";
+
+  // Ürünleri yükle (kategoriye göre)
+  useEffect(() => {
+    const loadProducts = async () => {
       try {
-        const data = await fetchProducts();
+        const data =
+          selectedCategory === "all"
+            ? await fetchProducts()
+            : await fetchProductsByCategory(selectedCategory);
         setProducts(data);
-        console.log(data);
       } catch (error) {
-        console.error("Error fetching products in Home:", error);
+        console.error("Error loading products:", error);
       }
     };
+    loadProducts();
+  }, [selectedCategory]);
 
-    getData();
+  // Kategorileri yükle (sadece 1 kere)
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await fetchCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error loading categories:", error);
+      }
+    };
+    loadCategories();
   }, []);
+
+  // Search filtreleme
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>All Products</h1>
+      <h1 className={styles.heading}>🛍️ {categoryName}</h1>
+
+      <div className={styles.controls}>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+
+        <select
+          className={styles.select}
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="all">All Categories</option>
+          {categories.map((cat) => (
+            <option key={cat.slug} value={cat.slug}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className={styles.grid}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id} className={styles.card}>
-            <div
-              style={{
-                border: "3px solid #ddd",
-                borderRadius: "12px",
-                padding: "15px",
-                textAlign: "center",
-                transition: "transform 0.3s ease",
-                backgroundColor: "#fff",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                cursor: "pointer",
-              }}
-            >
-              {" "}
+            <div className={styles.innerCard}>
               <img
                 src={product.thumbnail}
                 alt={product.title}
