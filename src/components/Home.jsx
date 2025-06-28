@@ -71,14 +71,20 @@ export default function Home() {
           type="text"
           placeholder="Search products..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setSelectedCategory("all"); // arama yapılınca kategori sıfırlanır
+          }}
           className={styles.searchInput}
         />
 
         <select
           className={styles.select}
           value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          onChange={(e) => {
+            setSelectedCategory(e.target.value);
+            setSearchTerm("");
+          }}
         >
           <option value="all">All Categories</option>
           {categories.map((cat) => (
@@ -89,31 +95,35 @@ export default function Home() {
         </select>
       </div>
 
-      <div className={styles.grid}>
-        {filteredProducts.map((product) => (
-          <div key={product.id} className={styles.card}>
-            <div className={styles.innerCard}>
-              <img
-                src={product.thumbnail}
-                alt={product.title}
-                className={styles.image}
-              />
-              <h2 className={styles.title}>
-                {product.title.length > 20
-                  ? product.title.slice(0, 20) + "..."
-                  : product.title}
-              </h2>
+      {filteredProducts.length === 0 ? (
+        <p className={styles.notFound}>😔 No product found !</p>
+      ) : (
+        <div className={styles.grid}>
+          {filteredProducts.map((product) => (
+            <div key={product.id} className={styles.card}>
+              <div className={styles.innerCard}>
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  className={styles.image}
+                />
+                <h2 className={styles.title}>
+                  {product.title.length > 20
+                    ? product.title.slice(0, 20) + "..."
+                    : product.title}
+                </h2>
+              </div>
+              <p className={styles.price}>{product.price} $</p>
+              <button
+                className={styles.addBtn}
+                onClick={() => console.log("Product added :", product.title)}
+              >
+                + Add
+              </button>
             </div>
-            <p className={styles.price}>{product.price} $</p>
-            <button
-              className={styles.addBtn}
-              onClick={() => console.log("Ürün eklendi:", product.title)}
-            >
-              + Add
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

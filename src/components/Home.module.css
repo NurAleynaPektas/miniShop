@@ -39,7 +39,6 @@
   border-color: #007b5e;
 }
 
-
 .grid {
   display: grid;
   gap: 20px;
@@ -115,10 +114,16 @@
   margin-bottom: 30px;
 }
 
-
 .select {
   padding: 10px;
   border-radius: 8px;
   border: 2px solid #ccc;
   font-size: 1rem;
+}
+.notFound {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #f9f5f5;
+  margin-top: 30px;
 }
