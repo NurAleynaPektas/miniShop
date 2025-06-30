@@ -9,18 +9,32 @@
 
 /* Logo */
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 2.5rem;
   font-weight: bold;
 }
 .logoImg {
   height: 150px;
   object-fit: contain;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .logoImg:hover {
   transform: scale(1.05);
   transition: 0.3s ease;
 }
-
+.trendPick:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+.trendPick {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+}
 /* Hamburger button */
 .hamburger {
   display: none; /* Desktop gizle */
@@ -79,5 +93,15 @@
 
   .navLinks.open {
     display: flex;
+  }
+
+  .logoImg {
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .trendPick{
+    font-size: 2rem;
   }
 }

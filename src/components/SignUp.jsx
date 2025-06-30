@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./SignUp.module.css";
+import { registerUser } from "../api/authApi";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -7,7 +8,6 @@ export default function SignUp() {
     email: "",
     password: "",
   });
-
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -15,22 +15,23 @@ export default function SignUp() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basit doğrulama
     if (!formData.name || !formData.email || !formData.password) {
-      setError("Please fill in all fields.");
+      setError("Tüm alanlar zorunlu.");
       return;
     }
 
-    // Geçici kayıt işlemi
-    console.log("Kayıt bilgileri:", formData);
-    alert("Kayıt başarılı!");
-
-    // Alanları temizle
-    setFormData({ name: "", email: "", password: "" });
-    setError("");
+    try {
+      const newUser = await registerUser(formData);
+      alert("Kayıt başarılı!");
+      console.log("Yeni kullanıcı:", newUser);
+      setFormData({ name: "", email: "", password: "" });
+      setError("");
+    } catch (err) {
+      setError("Kayıt başarısız.");
+    }
   };
 
   return (
