@@ -33,7 +33,7 @@ export default function Login() {
 
   return (
     <div className={styles.loginContainer}>
-      <h2>Login</h2>
+      <h2 className={styles.loginTitle}>Login</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="email"
