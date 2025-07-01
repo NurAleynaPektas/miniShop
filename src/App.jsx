@@ -49,7 +49,29 @@ function App() {
       }
     });
   };
-  
+
+  // Sepette ürün adedini artır
+  const handleIncrease = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // Sepette ürün adedini azalt
+  const handleDecrease = (productId) => {
+    setCartItems(
+      (prevItems) =>
+        prevItems
+          .map((item) =>
+            item.id === productId
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+          .filter((item) => item.quantity > 0) // 0 olursa sepetten çıkar
+    );
+  };
 
   // Login başarılı olduktan sonra çağrılacak fonksiyon:
   const handleLogin = () => {
@@ -96,10 +118,15 @@ function App() {
           path="/cart"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Cart cartItems={cartItems} />
+              <Cart
+                cartItems={cartItems}
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
+              />
             </PrivateRoute>
           }
         />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
