@@ -1,24 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import logo from "../img/trendPick (2).png";
 
-export default function Navbar() {
+export default function Navbar({ isLoggedIn, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
+  const handleLogoutClick = () => {
+    if (onLogout) onLogout();
+    setIsOpen(false);
     navigate("/login");
   };
 
@@ -56,10 +49,7 @@ export default function Navbar() {
             <li className={styles.logoutListItem}>
               <button
                 className={styles.logoutBtn}
-                onClick={() => {
-                  handleLogout();
-                  setIsOpen(false);
-                }}
+                onClick={handleLogoutClick}
                 type="button"
               >
                 Logout

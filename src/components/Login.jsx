@@ -4,7 +4,7 @@ import { loginUser } from "../api/authApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -19,18 +19,7 @@ export default function Login() {
 
     if (!formData.email || !formData.password) {
       setError("Lütfen tüm alanları doldurun.");
-      toast.error("Lütfen tüm alanları doldurun.", {
-        style: {
-          border: "1px solid #f87171",
-          padding: "16px",
-          color: "#7f1d1d",
-          background: "#fef2f2",
-        },
-        iconTheme: {
-          primary: "#dc2626",
-          secondary: "#fef2f2",
-        },
-      });
+      toast.error("Lütfen tüm alanları doldurun.");
       return;
     }
 
@@ -39,37 +28,17 @@ export default function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      toast.success("Giriş başarılı!", {
-        style: {
-          border: "1px solid #4ade80",
-          padding: "16px",
-          color: "#166534",
-          background: "#ecfdf5",
-        },
-        iconTheme: {
-          primary: "#22c55e",
-          secondary: "#ecfdf5",
-        },
-      });
+      toast.success("Giriş başarılı!");
 
       setFormData({ email: "", password: "" });
       setError("");
 
-      navigate("/"); // Girişten sonra ana sayfaya yönlendirme
+      if (onLogin) onLogin(); // Burada isLoggedIn state güncelleniyor
+
+      navigate("/"); // Ana sayfaya yönlendir
     } catch (err) {
       setError(err.message || "Giriş başarısız.");
-      toast.error(err.message || "Giriş başarısız.", {
-        style: {
-          border: "1px solid #f87171",
-          padding: "16px",
-          color: "#7f1d1d",
-          background: "#fef2f2",
-        },
-        iconTheme: {
-          primary: "#dc2626",
-          secondary: "#fef2f2",
-        },
-      });
+      toast.error(err.message || "Giriş başarısız.");
     }
   };
 

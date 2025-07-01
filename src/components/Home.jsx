@@ -7,7 +7,7 @@ import {
 } from "../api/productApi";
 import styles from "./Home.module.css";
 
-export default function Home() {
+export default function Home({ onAddToCart }) {
   const location = useLocation();
 
   const [products, setProducts] = useState([]);
@@ -15,20 +15,17 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // URL değiştiğinde search ve kategori sıfırlansın
   useEffect(() => {
     setSearchTerm("");
     setSelectedCategory("all");
   }, [location.pathname]);
 
-  // Kategori adı başlık için
   const categoryName =
     selectedCategory === "all"
       ? "All Products"
       : categories.find((cat) => cat.slug === selectedCategory)?.name ||
         "Products";
 
-  // Ürünleri yükle (kategoriye göre)
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -44,7 +41,6 @@ export default function Home() {
     loadProducts();
   }, [selectedCategory]);
 
-  // Kategorileri yükle (sadece 1 kere)
   useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -57,7 +53,6 @@ export default function Home() {
     loadCategories();
   }, []);
 
-  // Search filtreleme
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -73,7 +68,7 @@ export default function Home() {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            setSelectedCategory("all"); // arama yapılınca kategori sıfırlanır
+            setSelectedCategory("all");
           }}
           className={styles.searchInput}
         />
@@ -116,7 +111,7 @@ export default function Home() {
               <p className={styles.price}>{product.price} $</p>
               <button
                 className={styles.addBtn}
-                onClick={() => console.log("Product added :", product.title)}
+                onClick={() => onAddToCart(product)}
               >
                 + Add
               </button>

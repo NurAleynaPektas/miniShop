@@ -1,13 +1,26 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./components/Home";
 import Navbar from "./components/Nabvar";
 import Login from "./components/Login";
-import Signup from "./components/SignUp";
+import SignUp from "./components/SignUp";
 import Cart from "./components/Cart";
 import { Toaster } from "react-hot-toast";
 
+function PrivateRoute({ children, isLoggedIn }) {
+  return isLoggedIn ? children : <Navigate to="/login" replace />;
+}
+
+function PublicRoute({ children, isLoggedIn }) {
+  return isLoggedIn ? <Navigate to="/" replace /> : children;
+}
+
 function App() {
+  // Başlangıçta token varsa true yap
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!localStorage.getItem("token")
+  );
+
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -17,19 +30,77 @@ function App() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  // Sepete ürün ekleme fonksiyonu
   const handleAddToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    setCartItems((prevItems) => {
+      // Sepette var mı kontrol et
+      const existingProduct = prevItems.find((item) => item.id === product.id);
+
+      if (existingProduct) {
+        // Varsa, adetini 1 artır
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        // Yoksa, yeni ürün olarak ekle (adet 1)
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
+  };
+  
+
+  // Login başarılı olduktan sonra çağrılacak fonksiyon:
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  // Logout fonksiyonu:
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Toaster position="top-right" />
       <Routes>
-        <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute isLoggedIn={isLoggedIn}>
+              <Login onLogin={handleLogin} />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute isLoggedIn={isLoggedIn}>
+              <SignUp />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <Home onAddToCart={handleAddToCart} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <Cart cartItems={cartItems} />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
