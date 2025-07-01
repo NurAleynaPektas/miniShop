@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./SignUp.module.css";
 import { registerUser } from "../api/authApi";
+import toast from "react-hot-toast";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -19,18 +20,40 @@ export default function SignUp() {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      setError("Tüm alanlar zorunlu.");
+      setError("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
     try {
       const newUser = await registerUser(formData);
-      alert("Kayıt başarılı!");
-      console.log("Yeni kullanıcı:", newUser);
+      toast.success("Successfully registered !", {
+        style: {
+          border: "1px solid #4ade80",
+          padding: "16px",
+          color: "#166534",
+        },
+        iconTheme: {
+          primary: "#4ade80",
+          secondary: "#dcfce7",
+        },
+      });
       setFormData({ name: "", email: "", password: "" });
       setError("");
     } catch (err) {
-      setError("Kayıt başarısız.");
+      setError("Registration failed. Please try again.");
+      toast.error("Registration failed. Please try again.", {
+        style: {
+          border: "1px solid #f87171",
+          padding: "16px",
+          color: "#7f1d1d",
+          background: "#fef2f2",
+        },
+        iconTheme: {
+          primary: "#dc2626",
+          secondary: "#fef2f2",
+        },
+      });
     }
   };
 
