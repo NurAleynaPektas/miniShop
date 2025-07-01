@@ -72,6 +72,12 @@ function App() {
           .filter((item) => item.quantity > 0) // 0 olursa sepetten çıkar
     );
   };
+  // Sepetten tamamen ürün sil
+  const handleRemoveItem = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
+  };
 
   // Login başarılı olduktan sonra çağrılacak fonksiyon:
   const handleLogin = () => {
@@ -114,18 +120,20 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/cart"
-          element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Cart
-                cartItems={cartItems}
-                onIncrease={handleIncrease}
-                onDecrease={handleDecrease}
-              />
-            </PrivateRoute>
-          }
-        />
+       <Route
+  path="/cart"
+  element={
+    <PrivateRoute isLoggedIn={isLoggedIn}>
+      <Cart
+        cartItems={cartItems}
+        onIncrease={handleIncrease}
+        onDecrease={handleDecrease}
+        onRemove={handleRemoveItem} 
+      />
+    </PrivateRoute>
+  }
+/>
+
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,6 +1,6 @@
 import styles from "./Cart.module.css";
 
-export default function Cart({ cartItems, onIncrease, onDecrease }) {
+export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -8,9 +8,9 @@ export default function Cart({ cartItems, onIncrease, onDecrease }) {
 
   return (
     <div className={styles.cartBox}>
-      <h2>🛒 My Cart</h2>
+      <h2 className={styles.cartTitle}>🛒 My Cart</h2>
       {cartItems.length === 0 ? (
-        <p>Sepet boş.</p>
+        <p>Your cart is empty.</p>
       ) : (
         <>
           <div className={styles.cartList}>
@@ -25,11 +25,12 @@ export default function Cart({ cartItems, onIncrease, onDecrease }) {
                   <h4>{item.title}</h4>
                   <div className={styles.controls}>
                     <button onClick={() => onDecrease(item.id)}>-</button>
-                    <span>{item.quantity}</span>
+                    <span className={styles.quantity}>{item.quantity}</span>
                     <button onClick={() => onIncrease(item.id)}>+</button>
                     <span className={styles.itemTotal}>
                       = {(item.price * item.quantity).toFixed(2)} $
                     </span>
+                    <button onClick={() => onRemove(item.id)}>🗑️</button>
                   </div>
                 </div>
               </div>
