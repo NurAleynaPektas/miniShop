@@ -27,7 +27,7 @@ export default function SignUp() {
 
     try {
       const newUser = await registerUser(formData);
-      toast.success("Successfully registered !", {
+      toast.success("Successfully registered!", {
         style: {
           border: "1px solid #4ade80",
           padding: "16px",
@@ -41,8 +41,10 @@ export default function SignUp() {
       setFormData({ name: "", email: "", password: "" });
       setError("");
     } catch (err) {
-      setError("Registration failed. Please try again.");
-      toast.error("Registration failed. Please try again.", {
+      const errorMessage =
+        err.message || "Registration failed. Please try again.";
+      setError(errorMessage);
+      toast.error(errorMessage, {
         style: {
           border: "1px solid #f87171",
           padding: "16px",
