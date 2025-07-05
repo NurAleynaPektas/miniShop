@@ -8,42 +8,42 @@
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  }
-  
-  .loginForm{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .loginInput {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  .loginBtn{
-    padding: 10px;
-    background-color: #f57c00;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .loginBtn:hover {
-    background-color: #e65100;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.9rem;
-  }
-  .loginTitle{
-    width: 80%;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.loginInput {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.loginBtn {
+  padding: 10px;
+  background-color: #f57c00;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: #e65100;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+.loginTitle {
+  width: 80%;
   text-align: center;
   margin-bottom: 30px;
   font-size: 2rem;
@@ -52,4 +52,17 @@
   animation: fadeIn 1s ease-in-out;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
   border-radius: 12px;
-  }
+}
+.signupLink {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #ccc;
+}
+
+.linkText {
+  color: #4ade80;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}

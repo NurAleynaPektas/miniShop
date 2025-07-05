@@ -120,20 +120,19 @@ function App() {
             </PrivateRoute>
           }
         />
-       <Route
-  path="/cart"
-  element={
-    <PrivateRoute isLoggedIn={isLoggedIn}>
-      <Cart
-        cartItems={cartItems}
-        onIncrease={handleIncrease}
-        onDecrease={handleDecrease}
-        onRemove={handleRemoveItem} 
-      />
-    </PrivateRoute>
-  }
-/>
-
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <Cart
+                cartItems={cartItems}
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
+                onRemove={handleRemoveItem}
+              />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

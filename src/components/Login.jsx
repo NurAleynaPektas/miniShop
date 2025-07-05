@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import { loginUser } from "../api/authApi";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login({ onLogin }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -18,8 +18,8 @@ export default function Login({ onLogin }) {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setError("Lütfen tüm alanları doldurun.");
-      toast.error("Lütfen tüm alanları doldurun.");
+      setError("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -28,17 +28,17 @@ export default function Login({ onLogin }) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      toast.success("Giriş başarılı!");
+      toast.success("Successfully logged in!");
 
       setFormData({ email: "", password: "" });
       setError("");
 
-      if (onLogin) onLogin(); // Burada isLoggedIn state güncelleniyor
+      if (onLogin) onLogin();
 
-      navigate("/"); // Ana sayfaya yönlendir
+      navigate("/");
     } catch (err) {
-      setError(err.message || "Giriş başarısız.");
-      toast.error(err.message || "Giriş başarısız.");
+      setError(err.message || "Fail to login.");
+      toast.error(err.message || "Fail to login.");
     }
   };
 
@@ -70,6 +70,13 @@ export default function Login({ onLogin }) {
           Login
         </button>
       </form>
+
+      <p className={styles.signupLink}>
+        Don't have an account?{" "}
+        <Link to="/signup" className={styles.linkText}>
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 }

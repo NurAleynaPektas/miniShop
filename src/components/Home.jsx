@@ -6,6 +6,8 @@ import {
   fetchProductsByCategory,
 } from "../api/productApi";
 import styles from "./Home.module.css";
+import toast from "react-hot-toast";
+
 
 export default function Home({ onAddToCart }) {
   const location = useLocation();
@@ -56,7 +58,18 @@ export default function Home({ onAddToCart }) {
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const handleAdd = (product) => {
+    const isInCart = JSON.parse(localStorage.getItem("cartItems") || "[]").some(
+      (item) => item.id === product.id
+    );
 
+    if (isInCart) {
+      toast.error("❗ Already in cart!");
+    } else {
+      onAddToCart(product);
+      toast.success("✅ Added to cart!");
+    }
+  };
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>🛍️ {categoryName}</h1>
@@ -111,7 +124,7 @@ export default function Home({ onAddToCart }) {
               <p className={styles.price}>{product.price} $</p>
               <button
                 className={styles.addBtn}
-                onClick={() => onAddToCart(product)}
+                onClick={() => handleAdd(product)}
               >
                 + Add
               </button>
