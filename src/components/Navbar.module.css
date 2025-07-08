@@ -15,29 +15,48 @@
   font-size: 2.5rem;
   font-weight: bold;
 }
+
 .logoImg {
   height: 150px;
   object-fit: contain;
   border-radius: 50%;
   cursor: pointer;
-}
-.logoImg:hover {
-  transform: scale(1.05);
   transition: 0.3s ease;
 }
+
+.logoImg:hover,
 .trendPick:hover {
   transform: scale(1.05);
-  transition: 0.3s ease;
 }
+
 .trendPick {
   color: white;
   font-size: 3rem;
   font-weight: bold;
   cursor: pointer;
 }
+
+/* Desktop Menü */
+.navLinksDesktop {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.navLinksDesktop a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navLinksDesktop a:hover {
+  color: #bcb9b9;
+}
+
 /* Hamburger button */
 .hamburger {
-  display: none; /* Desktop gizle */
+  display: none;
   flex-direction: column;
   cursor: pointer;
   border: none;
@@ -55,13 +74,17 @@
   border-radius: 2px;
 }
 
-/* Menü linkleri */
+/* Mobil Menü - offCanvas */
 .navLinks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
 }
 
 .navLinks a {
@@ -70,13 +93,18 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
-/*LOGOUT BUTTON*/
 
-.logoutListItem {
-  margin-left: 20px;
+.navLinks a:hover {
+  color: #bcb9b9;
+  font-size: 1.8rem;
+  transition: 0.5s ease;
 }
 
-/* Logout butonu stil */
+/* Logout button */
+.logoutListItem {
+  margin-left: 0;
+}
+
 .logoutBtn {
   background: rgb(207, 207, 207);
   border: 2px solid white;
@@ -89,44 +117,67 @@
   transition: color 0.3s ease;
 }
 
-/* Hover efekti */
 .logoutBtn:hover {
   color: #f4ecec;
 }
 
-/* Responsive kısmı */
+/* Off-canvas panel */
+.offCanvas {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  width: 50%;
+  background-color: #f28314;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+}
+
+.offCanvas.open {
+  right: 0;
+}
+
+/* Modal arka plan */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Kapat (X) tuşu */
+.closeBtn {
+  align-self: flex-end;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
 
-  .navLinks {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: rgba(228, 146, 45, 1);
-    flex-direction: column;
-    width: 100%;
-    max-width: 200px;
-    padding: 20px;
-    gap: 15px;
-    display: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(211, 9, 9, 0.1);
-    border: 2px solid rgb(182, 180, 180);
-  }
-
-  .navLinks.open {
-    display: flex;
-  }
-
   .logoImg {
     height: 100px;
-    object-fit: contain;
-    border-radius: 50%;
-    cursor: pointer;
   }
+
   .trendPick {
     font-size: 2rem;
+  }
+
+  .navLinksDesktop {
+    display: none;
   }
 }
