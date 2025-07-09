@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import styles from "./CheckoutPage.module.css";
+import styles from "./CheckOutPage.module.css";
 
 export default function CheckOutPage() {
   const location = useLocation();
