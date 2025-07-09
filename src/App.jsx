@@ -4,8 +4,8 @@ import Home from "./components/Home";
 import Navbar from "./components/Nabvar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import Checkout from "./components/CkeckOut";
 import Cart from "./components/Cart";
-import CheckOutPage from "./components/CheckOutPage";
 import { Toaster } from "react-hot-toast";
 
 // Özel Route bileşenleri
@@ -134,7 +134,7 @@ function App() {
           path="/checkout"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <CheckOutPage />
+              <Checkout />
             </PrivateRoute>
           }
         />

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import styles from "./CheckOutPage.module.css";
+import styles from "./CheckOut.module.css";
 
-export default function CheckOutPage() {
+export default function CheckOut() {
   const location = useLocation();
   const total = location.state?.total;
 
