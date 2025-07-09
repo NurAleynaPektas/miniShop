@@ -5,7 +5,7 @@ import Navbar from "./components/Nabvar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Cart from "./components/Cart";
-import CheckoutPage from "./components/CheckOutPage";
+import CheckOutPage from "./components/CheckOutpage";
 import { Toaster } from "react-hot-toast";
 
 // Özel Route bileşenleri
