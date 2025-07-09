@@ -134,7 +134,7 @@ function App() {
           path="/checkout"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <CheckoutPage />
+              <CheckOutPage />
             </PrivateRoute>
           }
         />
