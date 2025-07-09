@@ -80,3 +80,66 @@
 .quantity {
   font-weight: bold;
 }
+
+
+@media (max-width: 768px) {
+  .cartItem {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .info h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .itemTotal {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .controls button {
+    padding: 6px 10px;
+  }
+
+  /* 🗑️ Çöp Kutusu */
+  .controls button:last-child {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: red;
+    cursor: pointer;
+  }
+
+  .controls button:last-child:hover {
+    background: none;
+    color: darkred;
+  }
+}

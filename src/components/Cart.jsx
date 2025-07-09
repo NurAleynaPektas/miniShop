@@ -24,9 +24,19 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
                 <div className={styles.info}>
                   <h4>{item.title}</h4>
                   <div className={styles.controls}>
-                    <button onClick={() => onDecrease(item.id)}>-</button>
+                    <button
+                      className={styles.decrease}
+                      onClick={() => onDecrease(item.id)}
+                    >
+                      -
+                    </button>
                     <span className={styles.quantity}>{item.quantity}</span>
-                    <button onClick={() => onIncrease(item.id)}>+</button>
+                    <button
+                      className={styles.increase}
+                      onClick={() => onIncrease(item.id)}
+                    >
+                      +
+                    </button>
                     <span className={styles.itemTotal}>
                       = {(item.price * item.quantity).toFixed(2)} $
                     </span>
@@ -38,7 +48,7 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
           </div>
           <div className={styles.totalBox}>
             <p>
-              🧾 Amount : <strong>{totalPrice.toFixed(2)} $</strong>
+              Amount 🧾 : <strong>{totalPrice.toFixed(2)} $</strong>
             </p>
           </div>
         </>
