@@ -1,10 +1,16 @@
+import { useNavigate } from "react-router-dom"; // bu satırı en üste ekle
 import styles from "./Cart.module.css";
-
 export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
+  const navigate = useNavigate();
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { total: totalPrice.toFixed(2) } });
+  };
 
   return (
     <div className={styles.cartBox}>
@@ -50,6 +56,9 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
             <p>
               Amount 🧾 : <strong>{totalPrice.toFixed(2)} $</strong>
             </p>
+            <button onClick={handleCheckout} className={styles.checkoutButton}>
+              Buy
+            </button>
           </div>
         </>
       )}

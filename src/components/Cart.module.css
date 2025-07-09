@@ -80,7 +80,20 @@
 .quantity {
   font-weight: bold;
 }
+.checkoutButton {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
+.checkoutButton:hover {
+  background-color: #45a049;
+}
 
 @media (max-width: 768px) {
   .cartItem {

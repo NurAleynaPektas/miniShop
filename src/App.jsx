@@ -5,8 +5,10 @@ import Navbar from "./components/Nabvar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Cart from "./components/Cart";
+import CheckoutPage from "./components/CheckoutPage"; // Ödeme sayfasını import et
 import { Toaster } from "react-hot-toast";
 
+// Özel Route bileşenleri
 function PrivateRoute({ children, isLoggedIn }) {
   return isLoggedIn ? children : <Navigate to="/login" replace />;
 }
@@ -16,7 +18,6 @@ function PublicRoute({ children, isLoggedIn }) {
 }
 
 function App() {
-  // Başlangıçta token varsa true yap
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => !!localStorage.getItem("token")
   );
@@ -30,27 +31,23 @@ function App() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Sepete ürün ekleme fonksiyonu
+  // Ürün sepete ekleme
   const handleAddToCart = (product) => {
     setCartItems((prevItems) => {
-      // Sepette var mı kontrol et
       const existingProduct = prevItems.find((item) => item.id === product.id);
-
       if (existingProduct) {
-        // Varsa, adetini 1 artır
         return prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        // Yoksa, yeni ürün olarak ekle (adet 1)
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
   };
 
-  // Sepette ürün adedini artır
+  // Ürün adedini artır
   const handleIncrease = (productId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -59,32 +56,32 @@ function App() {
     );
   };
 
-  // Sepette ürün adedini azalt
+  // Ürün adedini azalt
   const handleDecrease = (productId) => {
-    setCartItems(
-      (prevItems) =>
-        prevItems
-          .map((item) =>
-            item.id === productId
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter((item) => item.quantity > 0) // 0 olursa sepetten çıkar
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
     );
   };
-  // Sepetten tamamen ürün sil
+
+  // Ürünü tamamen sil
   const handleRemoveItem = (productId) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId)
     );
   };
 
-  // Login başarılı olduktan sonra çağrılacak fonksiyon:
+  // Login olunca çalışır
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Logout fonksiyonu:
+  // Çıkış
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -133,7 +130,14 @@ function App() {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <CheckoutPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
