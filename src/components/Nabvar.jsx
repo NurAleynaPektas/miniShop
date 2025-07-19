@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import logo from "../img/trendPick (2).png";
+import { FiLogOut } from "react-icons/fi";
 
 export default function Navbar({ isLoggedIn, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,8 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                   onClick={handleLogoutClick}
                   type="button"
                 >
-                  Logout
+                  <FiLogOut style={{ marginRight: "8px" }} />
+                  Exit
                 </button>
               </li>
             </>
@@ -95,7 +97,8 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                   onClick={handleLogoutClick}
                   type="button"
                 >
-                  Logout
+                  <FiLogOut style={{ marginRight: "8px" }} />
+                  Exit
                 </button>
               </li>
             </>
