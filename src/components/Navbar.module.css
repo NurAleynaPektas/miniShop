@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  color: white;
   position: relative;
 }
 
@@ -30,7 +29,6 @@
 }
 
 .trendPick {
-  color: white;
   font-size: 3rem;
   font-weight: bold;
   cursor: pointer;
@@ -44,14 +42,13 @@
 }
 
 .navLinksDesktop a {
-  color: white;
   text-decoration: none;
   font-size: 2.1rem;
   font-weight: bold;
 }
 
 .navLinksDesktop a:hover {
-  color: #bcb9b9;
+  color: #474747;
 }
 
 /* Hamburger button */
@@ -88,14 +85,13 @@
 }
 
 .navLinks a {
-  color: white;
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .navLinks a:hover {
-  color: #bcb9b9;
+  color: #474646;
   font-size: 1.8rem;
   transition: 0.5s ease;
 }
@@ -128,7 +124,6 @@
   right: -100%;
   height: 100%;
   width: 50%;
-  background-color: #f28314;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   transition: right 0.3s ease-in-out;
@@ -158,7 +153,6 @@
   font-size: 2rem;
   background: none;
   border: none;
-  color: white;
   cursor: pointer;
   margin-bottom: 1rem;
 }
