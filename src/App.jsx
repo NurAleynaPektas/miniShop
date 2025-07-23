@@ -109,14 +109,8 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Home onAddToCart={handleAddToCart} />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
+
         <Route
           path="/cart"
           element={

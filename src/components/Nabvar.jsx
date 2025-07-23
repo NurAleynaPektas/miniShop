@@ -19,10 +19,15 @@ export default function Navbar({ isLoggedIn, onLogout }) {
   return (
     <>
       <nav className={styles.navbar}>
-        <div className={styles.logo}>
+        {/* Logo alanı - Ana sayfaya yönlendirir */}
+        <NavLink
+          to="/"
+          className={styles.logo}
+          onClick={() => setIsOpen(false)}
+        >
           <img src={logo} alt="TrendPick Logo" className={styles.logoImg} />
           <p className={styles.trendPick}>TrendPick</p>
-        </div>
+        </NavLink>
 
         {/* Desktop Menü */}
         <ul className={styles.navLinksDesktop}>
@@ -49,9 +54,6 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             <>
               <li>
                 <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Sign Up</NavLink>
               </li>
             </>
           )}
