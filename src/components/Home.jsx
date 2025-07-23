@@ -121,7 +121,7 @@ export default function Home({ onAddToCart }) {
                     : product.title}
                 </h2>
               </div>
-              <p className={styles.price}>{product.price} $</p>
+              <p className={styles.price}>Price: {product.price} $</p>
               <button
                 className={styles.addBtn}
                 onClick={() => handleAdd(product)}
