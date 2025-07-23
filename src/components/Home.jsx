@@ -121,7 +121,17 @@ export default function Home({ onAddToCart }) {
                     : product.title}
                 </h2>
               </div>
-              <p className={styles.price}>Price: {product.price} $</p>
+              <div className={styles.priceRating}>
+                <span className={styles.price}>{product.price} $</span>
+                <span className={styles.rating}>
+                  {"★".repeat(Math.round(product.rating))}
+                  {"☆".repeat(5 - Math.round(product.rating))}{" "}
+                  <span className={styles.ratingNumber}>
+                    ({product.rating.toFixed(1)})
+                  </span>
+                </span>
+              </div>
+
               <button
                 className={styles.addBtn}
                 onClick={() => handleAdd(product)}
