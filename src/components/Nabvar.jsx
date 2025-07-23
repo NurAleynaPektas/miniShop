@@ -19,7 +19,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
   return (
     <>
       <nav className={styles.navbar}>
-        {/* Logo alanı - Ana sayfaya yönlendirir */}
+        {/* Logo alanı */}
         <NavLink
           to="/"
           className={styles.logo}
@@ -32,12 +32,26 @@ export default function Navbar({ isLoggedIn, onLogout }) {
         {/* Desktop Menü */}
         <ul className={styles.navLinksDesktop}>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
+            >
+              Home
+            </NavLink>
           </li>
           {isLoggedIn ? (
             <>
               <li>
-                <NavLink to="/cart">Cart</NavLink>
+                <NavLink
+                  to="/cart"
+                  className={({ isActive }) =>
+                    `${styles.navLink} ${isActive ? styles.active : ""}`
+                  }
+                >
+                  Cart
+                </NavLink>
               </li>
               <li className={styles.logoutListItem}>
                 <button
@@ -51,11 +65,16 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               </li>
             </>
           ) : (
-            <>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            </>
+            <li>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.active : ""}`
+                }
+              >
+                Login
+              </NavLink>
+            </li>
           )}
         </ul>
 
@@ -74,22 +93,33 @@ export default function Navbar({ isLoggedIn, onLogout }) {
       {/* Backdrop */}
       {isOpen && <div className={styles.backdrop} onClick={toggleMenu}></div>}
 
-      {/* Off-canvas menu - Mobil */}
+      {/* Mobil Menü */}
       <div className={`${styles.offCanvas} ${isOpen ? styles.open : ""}`}>
         <button className={styles.closeBtn} onClick={toggleMenu}>
           ×
         </button>
         <ul className={styles.navLinks}>
           <li>
-            <NavLink to="/" onClick={toggleMenu}>
+            <NavLink
+              to="/"
+              onClick={toggleMenu}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
+            >
               Home
             </NavLink>
           </li>
-
           {isLoggedIn ? (
             <>
               <li>
-                <NavLink to="/cart" onClick={toggleMenu}>
+                <NavLink
+                  to="/cart"
+                  onClick={toggleMenu}
+                  className={({ isActive }) =>
+                    `${styles.navLink} ${isActive ? styles.active : ""}`
+                  }
+                >
                   Cart
                 </NavLink>
               </li>
@@ -107,12 +137,24 @@ export default function Navbar({ isLoggedIn, onLogout }) {
           ) : (
             <>
               <li>
-                <NavLink to="/login" onClick={toggleMenu}>
+                <NavLink
+                  to="/login"
+                  onClick={toggleMenu}
+                  className={({ isActive }) =>
+                    `${styles.navLink} ${isActive ? styles.active : ""}`
+                  }
+                >
                   Login
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" onClick={toggleMenu}>
+                <NavLink
+                  to="/signup"
+                  onClick={toggleMenu}
+                  className={({ isActive }) =>
+                    `${styles.navLink} ${isActive ? styles.active : ""}`
+                  }
+                >
                   Sign Up
                 </NavLink>
               </li>

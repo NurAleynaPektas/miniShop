@@ -13,6 +13,8 @@
   gap: 10px;
   font-size: 2.5rem;
   font-weight: bold;
+  text-decoration: none;
+  color: rgb(223, 104, 27);
 }
 
 .logoImg {
@@ -34,21 +36,30 @@
   cursor: pointer;
 }
 
+/* Ortak navLink stili */
+.navLink {
+  text-decoration: none;
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: rgb(223, 104, 27);
+  width: 100%;
+  padding: 10px 0;
+}
+
+.navLink:hover {
+  color: #474747;
+}
+
+.active {
+  color: rgb(202, 96, 25);
+  text-decoration: none;
+}
+
 /* Desktop Menü */
 .navLinksDesktop {
   display: flex;
   gap: 20px;
   list-style: none;
-}
-
-.navLinksDesktop a {
-  text-decoration: none;
-  font-size: 2.1rem;
-  font-weight: bold;
-}
-
-.navLinksDesktop a:hover {
-  color: #474747;
 }
 
 /* Hamburger button */
@@ -71,46 +82,39 @@
   border-radius: 2px;
 }
 
-/* Mobil Menü - offCanvas */
+/* Mobil Menü */
 .navLinks {
   list-style: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   height: 100%;
-  gap: 10px;
-  padding: 0;
+  gap: 20px;
+  padding: 2rem 1.5rem;
   margin: 0;
-}
-
-.navLinks a {
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.navLinks a:hover {
-  color: #474646;
-  font-size: 1.8rem;
-  transition: 0.5s ease;
 }
 
 /* Logout button */
 .logoutListItem {
-  margin-left: 0;
+  width: 100%;
 }
 
 .logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   background: rgb(207, 207, 207);
   border: 2px solid white;
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
   font-size: 1.5rem;
-  padding: 5px;
+  padding: 5px 10px;
   font-family: inherit;
   transition: color 0.3s ease;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .logoutBtn:hover {
@@ -123,7 +127,9 @@
   top: 0;
   right: -100%;
   height: 100%;
-  width: 50%;
+  width: 40%;
+  max-width: 320px;
+  background-color: #ffffff;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   transition: right 0.3s ease-in-out;
@@ -143,7 +149,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
 
@@ -155,24 +161,6 @@
   border: none;
   cursor: pointer;
   margin-bottom: 1rem;
-}
-.logoutBtn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: rgb(207, 207, 207);
-  border: 2px solid white;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  font-family: inherit;
-  transition: color 0.3s ease;
-}
-
-.logoutBtn:hover {
-  color: #f4ecec;
 }
 
 /* Responsive */
@@ -196,9 +184,18 @@
 
 @media (max-width: 480px) {
   .trendPick {
-    font-size: 20px;
+    font-size: 22px;
   }
+  .navLinks{
+    font-size: 1.2rem ;
+    gap: 10px;
+  }
+
   .logoImg {
     height: 60px;
+  }
+  .logoutBtn {
+    font-size: 1rem;
+    height: 40px;
   }
 }
