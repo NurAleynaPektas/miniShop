@@ -26,6 +26,8 @@
   height: 200px;
   object-fit: contain;
   margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
 }
 
 .title {
@@ -35,8 +37,8 @@
 
 .price {
   font-weight: bold;
-  font-size: 1.2rem;
-  color: #03a137;
+  font-size: 1.1rem;
+ 
 }
 
 .desc {
@@ -54,7 +56,15 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
-
+.controls{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+}
 .closeBtn {
   position: absolute;
   top: 10px;
@@ -63,5 +73,11 @@
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-  color: #888;
+  color: #f8f6f6;
+  background-color: red;
+  border-radius: 50%;
+}
+.closeBtn:hover {
+  background-color: rgb(218, 4, 4);
+  transition: 0.5s ease;
 }
