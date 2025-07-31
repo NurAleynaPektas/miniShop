@@ -7,7 +7,7 @@ import ProductModal from "./ProductModal";
 import FlashDeals from "./FlashDeals";
 
 export default function CategoryPage({ onAddToCart }) {
-  const { slug } = useParams();
+  const { categorySlug } = useParams();
   const [allProducts, setAllProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,15 +20,17 @@ export default function CategoryPage({ onAddToCart }) {
         fetchCategories(),
       ]);
       setAllProducts(products);
-      const selected = categories.find((cat) => cat.slug === slug);
+      const selected = categories.find(
+        (cat) => cat.categorySlug === categorySlug
+      );
       setCategoryName(selected?.name || "Products");
     };
     load();
-  }, [slug]);
+  }, [categorySlug]);
 
   const filtered = allProducts.filter(
     (p) =>
-      p.category === slug &&
+      p.category === categorySlug &&
       p.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
