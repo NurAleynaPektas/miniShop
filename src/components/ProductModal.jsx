@@ -13,19 +13,18 @@ export default function ProductModal({ product, onClose, onAddToCart }) {
           className={styles.image}
         />
         <h2 className={styles.title}>{product.title}</h2>
-
+        <p className={styles.price}>Price: ${product.price}</p>
         <p className={styles.desc}>{product.description}</p>
 
-        <div className={styles.controls}>
-          
-          <p className={styles.price}> ${product.price}</p>
+        {/* 🔐 Sadece Home sayfasında görünmesi için güvenli kontrol */}
+        {typeof onAddToCart === "function" && (
           <button
             className={styles.addBtn}
             onClick={() => onAddToCart(product)}
           >
             + Add to Cart
           </button>
-        </div>
+        )}
 
         <button className={styles.closeBtn} onClick={onClose}>
           X

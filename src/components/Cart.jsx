@@ -1,7 +1,11 @@
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from "./Cart.module.css";
+import ProductModal from "./ProductModal";
+
 export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
   const navigate = useNavigate();
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -26,6 +30,7 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
                   src={item.thumbnail}
                   alt={item.title}
                   className={styles.image}
+                  onClick={() => setSelectedProduct(item)}
                 />
                 <div className={styles.info}>
                   <h4>{item.title}</h4>
@@ -62,6 +67,12 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
           </div>
         </>
       )}
+
+      {/* Modal without add-to-cart */}
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </div>
   );
 }

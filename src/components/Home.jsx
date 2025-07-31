@@ -7,7 +7,7 @@ import {
 } from "../api/productApi";
 import styles from "./Home.module.css";
 import toast from "react-hot-toast";
-import ProductModal from "./ProductModal"; // ✅ Modal bileşeni import edildi
+import ProductModal from "./ProductModal";
 
 export default function Home({ onAddToCart }) {
   const location = useLocation();
@@ -16,7 +16,7 @@ export default function Home({ onAddToCart }) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null); // ✅ Modal için ürün
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     setSearchTerm("");
@@ -114,7 +114,7 @@ export default function Home({ onAddToCart }) {
             <div key={product.id} className={styles.card}>
               <div
                 className={styles.innerCard}
-                onClick={() => setSelectedProduct(product)} // ✅ Modal'ı aç
+                onClick={() => setSelectedProduct(product)}
               >
                 <img
                   src={product.thumbnail}
@@ -149,7 +149,7 @@ export default function Home({ onAddToCart }) {
         </div>
       )}
 
-      {/* ✅ Modal Aç */}
+      {/* Modal */}
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
