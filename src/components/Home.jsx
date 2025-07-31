@@ -7,7 +7,7 @@ import {
 } from "../api/productApi";
 import styles from "./Home.module.css";
 import toast from "react-hot-toast";
-
+import ProductModal from "./ProductModal"; // ✅ Modal bileşeni import edildi
 
 export default function Home({ onAddToCart }) {
   const location = useLocation();
@@ -16,6 +16,7 @@ export default function Home({ onAddToCart }) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null); // ✅ Modal için ürün
 
   useEffect(() => {
     setSearchTerm("");
@@ -58,6 +59,7 @@ export default function Home({ onAddToCart }) {
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const handleAdd = (product) => {
     const isInCart = JSON.parse(localStorage.getItem("cartItems") || "[]").some(
       (item) => item.id === product.id
@@ -70,6 +72,7 @@ export default function Home({ onAddToCart }) {
       toast.success("✅ Added to cart!");
     }
   };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>🛍️ {categoryName}</h1>
@@ -109,7 +112,10 @@ export default function Home({ onAddToCart }) {
         <div className={styles.grid}>
           {filteredProducts.map((product) => (
             <div key={product.id} className={styles.card}>
-              <div className={styles.innerCard}>
+              <div
+                className={styles.innerCard}
+                onClick={() => setSelectedProduct(product)} // ✅ Modal'ı aç
+              >
                 <img
                   src={product.thumbnail}
                   alt={product.title}
@@ -142,6 +148,16 @@ export default function Home({ onAddToCart }) {
           ))}
         </div>
       )}
+
+      {/* ✅ Modal Aç */}
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={(product) => {
+          handleAdd(product);
+          setSelectedProduct(null);
+        }}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"; // bu satırı en üste ekle
+import { useNavigate } from "react-router-dom"; 
 import styles from "./Cart.module.css";
 export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
   const navigate = useNavigate();
