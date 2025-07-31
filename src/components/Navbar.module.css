@@ -10,15 +10,15 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 2.5rem;
-  font-weight: bold;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
   text-decoration: none;
   color: rgb(223, 104, 27);
 }
 
 .logoImg {
-  height: 150px;
+  height: 120px;
   object-fit: contain;
   border-radius: 50%;
   cursor: pointer;
@@ -31,9 +31,33 @@
 }
 
 .trendPick {
-  font-size: 3rem;
+  font-size: 2.6rem;
   font-weight: bold;
   cursor: pointer;
+  line-height: 1;
+}
+
+.welcomeUnderLogo {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #444;
+  background: #f7f7f7;
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin-top: 4px;
+  animation: fadeIn 0.4s ease-in-out;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Ortak navLink stili */
@@ -62,7 +86,7 @@
   list-style: none;
 }
 
-/* Hamburger button */
+/* Hamburger (mobil menü butonu) */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -162,15 +186,27 @@
   cursor: pointer;
   margin-bottom: 1rem;
 }
+.welcomeLeft {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  animation: fadeIn 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+}
 
-/* Responsive */
+/* Responsive Ayarlar */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
 
   .logoImg {
-    height: 100px;
+    height: 90px;
   }
 
   .trendPick {
@@ -180,20 +216,27 @@
   .navLinksDesktop {
     display: none;
   }
+
+  .welcomeUnderLogo {
+    font-size: 1rem;
+    padding: 4px 8px;
+  }
 }
 
 @media (max-width: 480px) {
   .trendPick {
     font-size: 22px;
   }
-  .navLinks{
-    font-size: 1.2rem ;
+
+  .navLinks {
+    font-size: 1.2rem;
     gap: 10px;
   }
 
   .logoImg {
     height: 60px;
   }
+
   .logoutBtn {
     font-size: 1rem;
     height: 40px;

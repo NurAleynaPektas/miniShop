@@ -1,71 +1,51 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import {
-  fetchProducts,
-  fetchCategories,
-  fetchProductsByCategory,
-} from "../api/productApi";
+import { useNavigate } from "react-router-dom";
+import { fetchProducts, fetchCategories } from "../api/productApi";
 import styles from "./Home.module.css";
 import toast from "react-hot-toast";
 import ProductModal from "./ProductModal";
+import WeeklySlider from "./WeeklySlider";
+import FlashDeals from "./FlashDeals";
 
 export default function Home({ onAddToCart }) {
-  const location = useLocation();
+  const navigate = useNavigate();
 
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    setSearchTerm("");
-    setSelectedCategory("all");
-  }, [location.pathname]);
-
-  const categoryName =
-    selectedCategory === "all"
-      ? "All Products"
-      : categories.find((cat) => cat.slug === selectedCategory)?.name ||
-        "Products";
-
-  useEffect(() => {
-    const loadProducts = async () => {
+    const loadAll = async () => {
       try {
-        const data =
-          selectedCategory === "all"
-            ? await fetchProducts()
-            : await fetchProductsByCategory(selectedCategory);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error loading products:", error);
+        const [productsData, categoriesData] = await Promise.all([
+          fetchProducts(),
+          fetchCategories(),
+        ]);
+        setAllProducts(productsData);
+        setCategories(categoriesData);
+      } catch (err) {
+        console.error("Veri yüklenirken hata:", err);
       }
     };
-    loadProducts();
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error("Error loading categories:", error);
-      }
-    };
-    loadCategories();
+    loadAll();
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const weeklyProducts = allProducts.slice(0, 10);
+
+  const realFlashDeals = allProducts.filter((p) => p.discountPercentage > 30);
+  const flashDeals =
+    realFlashDeals.length > 0 ? realFlashDeals : allProducts.slice(10, 18); // rastgele öneri ürünler
+
+  const flashNote =
+    realFlashDeals.length === 0
+      ? "Şu anda özel indirimli ürün bulunmamaktadır. Size önerilen ürünler listelenmektedir."
+      : null;
 
   const handleAdd = (product) => {
-    const isInCart = JSON.parse(localStorage.getItem("cartItems") || "[]").some(
-      (item) => item.id === product.id
-    );
-
-    if (isInCart) {
+    const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const exists = cart.some((item) => item.id === product.id);
+    if (exists) {
       toast.error("❗ Already in cart!");
     } else {
       onAddToCart(product);
@@ -73,31 +53,42 @@ export default function Home({ onAddToCart }) {
     }
   };
 
+  const handleCategorySelect = (slug) => {
+    navigate(`/category/${slug}`);
+  };
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>🛍️ {categoryName}</h1>
+      <h1 className={styles.heading}>🛍️ Weekly Deals</h1>
 
+      {/* Arama ve Kategori Seçimi */}
       <div className={styles.controls}>
         <input
-          type="text"
+          className={styles.searchInput}
           placeholder="Search products..."
           value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setSelectedCategory("all");
-          }}
-          className={styles.searchInput}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
 
+        {/* Masaüstü: kategori butonları */}
+        <div className={styles.categoryButtons}>
+          {categories.map((cat) => (
+            <button
+              key={cat.slug}
+              className={styles.categoryBtn}
+              onClick={() => handleCategorySelect(cat.slug)}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobil: select dropdown */}
         <select
           className={styles.select}
-          value={selectedCategory}
-          onChange={(e) => {
-            setSelectedCategory(e.target.value);
-            setSearchTerm("");
-          }}
+          onChange={(e) => handleCategorySelect(e.target.value)}
         >
-          <option value="all">All Categories</option>
+          <option value="">Select category</option>
           {categories.map((cat) => (
             <option key={cat.slug} value={cat.slug}>
               {cat.name}
@@ -106,48 +97,18 @@ export default function Home({ onAddToCart }) {
         </select>
       </div>
 
-      {filteredProducts.length === 0 ? (
-        <p className={styles.notFound}>😔 No product found !</p>
-      ) : (
-        <div className={styles.grid}>
-          {filteredProducts.map((product) => (
-            <div key={product.id} className={styles.card}>
-              <div
-                className={styles.innerCard}
-                onClick={() => setSelectedProduct(product)}
-              >
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  className={styles.image}
-                />
-                <h2 className={styles.title}>
-                  {product.title.length > 20
-                    ? product.title.slice(0, 20) + "..."
-                    : product.title}
-                </h2>
-              </div>
-              <div className={styles.priceRating}>
-                <span className={styles.price}>{product.price} $</span>
-                <span className={styles.rating}>
-                  {"★".repeat(Math.round(product.rating))}
-                  {"☆".repeat(5 - Math.round(product.rating))}{" "}
-                  <span className={styles.ratingNumber}>
-                    ({product.rating.toFixed(1)})
-                  </span>
-                </span>
-              </div>
+      {/* Haftanın Ürünleri */}
+      <h2 className={styles.subheading}>🔥 Haftanın Ürünleri</h2>
+      <WeeklySlider products={weeklyProducts} onSelect={setSelectedProduct} />
 
-              <button
-                className={styles.addBtn}
-                onClick={() => handleAdd(product)}
-              >
-                + Add
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Flaş İndirimler */}
+      <FlashDeals
+        products={flashDeals}
+        onAdd={handleAdd}
+        onSelect={setSelectedProduct}
+        title="Flaş İndirimler"
+        note={flashNote}
+      />
 
       {/* Modal */}
       <ProductModal

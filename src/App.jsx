@@ -1,11 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./components/Home";
-import Navbar from "./components/Nabvar";
 import Login from "./components/Login";
+import Navbar from "./components/Nabvar";
 import SignUp from "./components/SignUp";
 import Checkout from "./components/CkeckOut";
 import Cart from "./components/Cart";
+import CategoryPage from "./components/CategoryPage"; // Kategori route'u için
 import { Toaster } from "react-hot-toast";
 
 // Özel Route bileşenleri
@@ -22,6 +23,11 @@ function App() {
     () => !!localStorage.getItem("token")
   );
 
+  const [userName, setUserName] = useState(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user?.name || "";
+  });
+
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -31,7 +37,6 @@ function App() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Ürün sepete ekleme
   const handleAddToCart = (product) => {
     setCartItems((prevItems) => {
       const existingProduct = prevItems.find((item) => item.id === product.id);
@@ -47,7 +52,6 @@ function App() {
     });
   };
 
-  // Ürün adedini artır
   const handleIncrease = (productId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -56,7 +60,6 @@ function App() {
     );
   };
 
-  // Ürün adedini azalt
   const handleDecrease = (productId) => {
     setCartItems((prevItems) =>
       prevItems
@@ -69,28 +72,32 @@ function App() {
     );
   };
 
-  // Ürünü tamamen sil
   const handleRemoveItem = (productId) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId)
     );
   };
 
-  // Login olunca çalışır
   const handleLogin = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUserName(user?.name || "");
     setIsLoggedIn(true);
   };
 
-  // Çıkış
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
+    setUserName("");
   };
 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        onLogout={handleLogout}
+        userName={userName}
+      />
       <Toaster position="top-right" />
       <Routes>
         <Route
@@ -110,6 +117,12 @@ function App() {
           }
         />
         <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
+
+        {/* Kategori route'u */}
+        <Route
+          path="/category/:categorySlug"
+          element={<CategoryPage onAddToCart={handleAddToCart} />}
+        />
 
         <Route
           path="/cart"

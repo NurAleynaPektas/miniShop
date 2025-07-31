@@ -1,31 +1,56 @@
 .container {
   padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .heading {
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  color: #222;
+  margin: 40px auto 30px auto;
+  max-width: 600px;
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.5rem;
-  font-weight: 600;
-  
-  animation: fadeIn 1s ease-in-out;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
+  animation: fadeInUp 0.8s ease;
 }
-@keyframes fadeIn {
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+.subheading {
+  font-size: 1.8rem;
+  margin: 40px 0 20px;
+  text-align: center;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Search & Category */
+.controls {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .searchInput {
-  display: block;
-  margin: 0 auto 30px auto;
   padding: 10px 15px;
   width: 60%;
   max-width: 400px;
@@ -37,126 +62,71 @@
 }
 
 .searchInput:focus {
-  border-color: #4b4a48;
-}
-
-.grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.card {
-  border: 2px solid #7e7e7e;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  background-color: #e8b09a;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: scale(1.03);
-}
-.innerCard {
-  border: 3px solid #c7c0c0;
-  border-radius: 12px;
-  padding: 15px;
-  background-color: #f3eeee;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.innerCard:hover {
-  transform: scale(1.03);
-}
-.image {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.title {
-  font-size: 1rem;
-  height: 50px;
-  overflow: hidden;
-}
-
-.price {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #03c033;
- 
-}
-.addBtn {
-  margin-top: 10px;
-  background-color: #06a31b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 0.9rem;
-}
-
-.addBtn:hover {
-  background-color: #088b0e;
-}
-.controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  border-color: #06a31b;
 }
 
 .select {
+  display: none;
   padding: 10px;
   border-radius: 8px;
   border: 2px solid #ccc;
   font-size: 1rem;
+  width: 80%;
+  max-width: 300px;
 }
-.notFound {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: #f9f5f5;
-  margin-top: 30px;
-}
-.priceRating {
+
+.categoryButtons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 15px;
-  margin: 0.5rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
-.price {
-  color: #0a0a0a;
-  font-size: 17px;
+.categoryBtn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
 }
 
-.rating {
-  color: #f5a623;
-  font-size: 18px ;
+.categoryBtn:hover {
+  background-color: #ccc;
 }
 
-.ratingNumber {
-  color: #666;
-  font-size: 16px;
-  
-}
-
+/* Responsive */
 @media screen and (max-width: 768px) {
+  .select {
+    display: block;
+  }
+
+  .categoryButtons {
+    display: none;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .subheading {
+    font-size: 1.4rem;
+  }
+
   .searchInput {
     width: 80%;
   }
-  .heading{
-    font-size: 2rem;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

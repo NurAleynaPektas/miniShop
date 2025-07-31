@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css";
 import logo from "../img/trendPick (2).png";
 import { FiLogOut } from "react-icons/fi";
 
-export default function Navbar({ isLoggedIn, onLogout }) {
+export default function Navbar({ isLoggedIn, onLogout, userName }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -16,10 +16,12 @@ export default function Navbar({ isLoggedIn, onLogout }) {
     navigate("/login");
   };
 
+  const firstName = userName?.split(" ")[0] || "User";
+
   return (
     <>
       <nav className={styles.navbar}>
-        {/* Logo alanı */}
+        {/* Logo */}
         <NavLink
           to="/"
           className={styles.logo}
@@ -31,6 +33,11 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
         {/* Desktop Menü */}
         <ul className={styles.navLinksDesktop}>
+          {isLoggedIn && (
+            <li className={styles.welcomeLeft}>
+              👋{firstName}
+            </li>
+          )}
           <li>
             <NavLink
               to="/"
@@ -41,6 +48,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               Home
             </NavLink>
           </li>
+
           {isLoggedIn ? (
             <>
               <li>
