@@ -29,15 +29,13 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
         >
           <img src={logo} alt="TrendPick Logo" className={styles.logoImg} />
           <p className={styles.trendPick}>TrendPick</p>
+          {isLoggedIn && (
+            <p className={styles.welcomeUnderLogo}>👋 Welcome, {firstName}</p>
+          )}
         </NavLink>
 
         {/* Desktop Menü */}
         <ul className={styles.navLinksDesktop}>
-          {isLoggedIn && (
-            <li className={styles.welcomeLeft}>
-              👋{firstName}
-            </li>
-          )}
           <li>
             <NavLink
               to="/"

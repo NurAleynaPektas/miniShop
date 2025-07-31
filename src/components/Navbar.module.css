@@ -6,13 +6,12 @@
   position: relative;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
   flex-direction: column;
   text-align: center;
-  gap: 5px;
+  gap: 2px; /* daha yakınlaştırıldı */
   text-decoration: none;
   color: rgb(223, 104, 27);
 }
@@ -35,18 +34,16 @@
   font-weight: bold;
   cursor: pointer;
   line-height: 1;
+  margin: 0;
 }
 
 .welcomeUnderLogo {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 500;
-  color: #444;
-  background: #f7f7f7;
-  padding: 4px 12px;
-  border-radius: 8px;
-  margin-top: 4px;
+  color: #555;
+  margin-top: 0;
+  line-height: 1.2;
   animation: fadeIn 0.4s ease-in-out;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 @keyframes fadeIn {
@@ -60,7 +57,6 @@
   }
 }
 
-/* Ortak navLink stili */
 .navLink {
   text-decoration: none;
   font-size: 2.1rem;
@@ -76,17 +72,14 @@
 
 .active {
   color: rgb(202, 96, 25);
-  text-decoration: none;
 }
 
-/* Desktop Menü */
 .navLinksDesktop {
   display: flex;
   gap: 20px;
   list-style: none;
 }
 
-/* Hamburger (mobil menü butonu) */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -106,7 +99,6 @@
   border-radius: 2px;
 }
 
-/* Mobil Menü */
 .navLinks {
   list-style: none;
   display: flex;
@@ -119,7 +111,6 @@
   margin: 0;
 }
 
-/* Logout button */
 .logoutListItem {
   width: 100%;
 }
@@ -145,7 +136,6 @@
   color: #f4ecec;
 }
 
-/* Off-canvas panel */
 .offCanvas {
   position: fixed;
   top: 0;
@@ -166,7 +156,6 @@
   right: 0;
 }
 
-/* Modal arka plan */
 .backdrop {
   position: fixed;
   top: 0;
@@ -177,7 +166,6 @@
   z-index: 999;
 }
 
-/* Kapat (X) tuşu */
 .closeBtn {
   align-self: flex-end;
   font-size: 2rem;
@@ -186,20 +174,7 @@
   cursor: pointer;
   margin-bottom: 1rem;
 }
-.welcomeLeft {
-  width: 100%;
-  font-size: 1.4rem;
-  font-weight: 500;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-right: 10px;
-  animation: fadeIn 0.4s ease-in-out;
-  display: flex;
-  align-items: center;
-}
 
-/* Responsive Ayarlar */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -219,7 +194,6 @@
 
   .welcomeUnderLogo {
     font-size: 1rem;
-    padding: 4px 8px;
   }
 }
 
@@ -240,5 +214,9 @@
   .logoutBtn {
     font-size: 1rem;
     height: 40px;
+  }
+
+  .welcomeUnderLogo {
+    display: block;
   }
 }
