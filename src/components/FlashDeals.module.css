@@ -3,7 +3,9 @@
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   margin-top: 10px;
+  justify-items: center;
 }
+
 .heading {
   display: flex;
   align-items: center;
@@ -22,7 +24,16 @@
   animation: fadeInUp 0.8s ease;
 }
 
+.note {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
 .card {
+  width: 100%;
+  max-width: 200px;
   border: 1px solid #ccc;
   border-radius: 12px;
   background-color: #fff;
@@ -44,6 +55,12 @@
   height: 120px;
   object-fit: contain;
   margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* Skeleton'lar için daha güzel görünüm */
+.image:has(.react-loading-skeleton) {
+  padding: 5px;
 }
 
 .title {
@@ -51,17 +68,21 @@
   margin-bottom: 6px;
   height: 40px;
   overflow: hidden;
+  line-height: 1.2;
 }
 
 .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .price {
   font-weight: bold;
   color: #03a137;
+  font-size: 0.9rem;
 }
 
 .addBtn {
@@ -78,13 +99,19 @@
 .addBtn:hover {
   background-color: #088b0e;
 }
+
 @media screen and (max-width: 768px) {
   .heading {
     font-size: 1.8rem;
   }
 }
+
 @media screen and (max-width: 480px) {
   .heading {
-    font-size: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .card {
+    max-width: 100%;
   }
 }

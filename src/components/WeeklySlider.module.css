@@ -1,6 +1,7 @@
 .sliderContainer {
   overflow-x: auto;
   padding-bottom: 10px;
+  margin-top: 20px;
 }
 
 .slider {
@@ -8,7 +9,7 @@
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 10px 0;
+  padding: 10px 5px;
 }
 
 .card {
@@ -22,6 +23,7 @@
   scroll-snap-align: start;
   transition: transform 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
@@ -33,14 +35,44 @@
   height: 120px;
   object-fit: contain;
   margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+/* Skeleton için uyumlu görünüm */
+.image:has(.react-loading-skeleton) {
+  padding: 5px;
 }
 
 .title {
   font-size: 0.9rem;
   margin: 0 0 4px 0;
+  min-height: 36px; /* 2 satırlık yükseklik için */
+  overflow: hidden;
+  line-height: 1.2;
 }
 
 .price {
   font-weight: bold;
   color: #03a137;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 140px;
+    padding: 8px;
+  }
+
+  .image {
+    height: 100px;
+  }
+
+  .title {
+    font-size: 0.8rem;
+  }
+
+  .price {
+    font-size: 0.8rem;
+  }
 }

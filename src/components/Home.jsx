@@ -14,11 +14,13 @@ export default function Home({ onAddToCart, setIsLoading }) {
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isPageLoading, setIsPageLoading] = useState(true); // FlashDeals + Slider için
 
   useEffect(() => {
     const loadAll = async () => {
       try {
-        setIsLoading(true); // göster
+        setIsLoading(true); // Global loader (üstteki bar gibi)
+        setIsPageLoading(true); // Sayfa içi skeletonlar için
         const [productsData, categoriesData] = await Promise.all([
           fetchProducts(),
           fetchCategories(),
@@ -29,7 +31,8 @@ export default function Home({ onAddToCart, setIsLoading }) {
         console.error("Error loading products", err);
         toast.error("Something went wrong while loading products.");
       } finally {
-        setIsLoading(false); // gizle
+        setIsLoading(false);
+        setIsPageLoading(false);
       }
     };
     loadAll();
@@ -63,6 +66,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
     <div className={styles.container}>
       <h1 className={styles.heading}>🛍️ Weekly Deals</h1>
 
+      {/* Arama ve Kategori Seçimi */}
       <div className={styles.controls}>
         <input
           className={styles.searchInput}
@@ -71,6 +75,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
+        {/* Masaüstü: Kategori butonları */}
         <div className={styles.categoryButtons}>
           {categories.map((cat) => (
             <button
@@ -83,6 +88,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
           ))}
         </div>
 
+        {/* Mobil: Kategori dropdown */}
         <select
           className={styles.select}
           onChange={(e) => handleCategorySelect(e.target.value)}
@@ -96,17 +102,25 @@ export default function Home({ onAddToCart, setIsLoading }) {
         </select>
       </div>
 
+      {/* Haftanın Ürünleri */}
       <h2 className={styles.heading}>🔥 Products of the Week</h2>
-      <WeeklySlider products={weeklyProducts} onSelect={setSelectedProduct} />
+      <WeeklySlider
+        products={weeklyProducts}
+        onSelect={setSelectedProduct}
+        isLoading={isPageLoading}
+      />
 
+      {/* Flaş İndirimler */}
       <FlashDeals
         products={flashDeals}
         onAdd={handleAdd}
         onSelect={setSelectedProduct}
         title="Flash Deals"
         note={flashNote}
+        isLoading={isPageLoading}
       />
 
+      {/* Ürün Detay Modal */}
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
