@@ -7,7 +7,7 @@ import ProductModal from "./ProductModal";
 import FlashDeals from "./FlashDeals";
 
 export default function CategoryPage({ onAddToCart }) {
-  const { categorySlug } = useParams();
+  const { categorySlug } = useParams(); // URL'den slug'ı al
   const [allProducts, setAllProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,18 +15,25 @@ export default function CategoryPage({ onAddToCart }) {
 
   useEffect(() => {
     const load = async () => {
-      const [products, categories] = await Promise.all([
-        fetchProducts(),
-        fetchCategories(),
-      ]);
-      setAllProducts(products);
-      const selected = categories.find(
-        (cat) => cat.categorySlug === categorySlug
-      );
-      setCategoryName(selected?.name || "Products");
+      try {
+        const [products, categories] = await Promise.all([
+          fetchProducts(),
+          fetchCategories(),
+        ]);
+        setAllProducts(products);
+
+        const selectedCategory = categories.find(
+          (cat) => cat.slug === categorySlug // 🔧 DÜZELTİLEN YER
+        );
+        setCategoryName(selectedCategory?.name || "Products");
+      } catch (error) {
+        toast.error("Error loading category data.");
+        console.error(error);
+      }
     };
+
     load();
-  }, [categorySlug]);
+  }, [categorySlug]); // slug değiştiğinde tekrar çalış
 
   const filtered = allProducts.filter(
     (p) =>
@@ -56,7 +63,7 @@ export default function CategoryPage({ onAddToCart }) {
       />
 
       {filtered.length === 0 ? (
-        <p className={styles.notFound}>Ürün bulunamadı.</p>
+        <p className={styles.notFound}>No products found.</p>
       ) : (
         <FlashDeals
           products={filtered}
