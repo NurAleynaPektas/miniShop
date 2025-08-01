@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import ProductModal from "./ProductModal";
 import WeeklySlider from "./WeeklySlider";
 import FlashDeals from "./FlashDeals";
-import shop from "../img/shop.jpg";
+import HeroSlider from "./HeroSlider"; // Yeni vitrin slider'ı eklendi
 
 export default function Home({ onAddToCart, setIsLoading }) {
   const navigate = useNavigate();
@@ -62,11 +62,14 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
   return (
     <div>
-      <img src={shop} alt="TrendPick Shop" className={styles.shopImg} />
+      {/* Vitrin slider (Hero Slider) */}
+      <HeroSlider />
 
       <div className={styles.container}>
+        {/* Başlık */}
         <h1 className={styles.heading}>🛍️ Weekly Deals</h1>
 
+        {/* Arama ve Kategori Seçimi */}
         <div className={styles.controls}>
           <input
             className={styles.searchInput}
@@ -75,7 +78,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          {/* Masaüstü butonlar */}
+          {/* Masaüstü: Kategori butonları */}
           <div className={styles.categoryButtons}>
             {categories.map((cat) => (
               <button
@@ -88,7 +91,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
             ))}
           </div>
 
-          {/* Mobil dropdown */}
+          {/* Mobil: Kategori dropdown */}
           <select
             className={styles.select}
             onChange={(e) => handleCategorySelect(e.target.value)}
@@ -102,6 +105,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
           </select>
         </div>
 
+        {/* Haftanın Ürünleri */}
         <h2 className={styles.heading}>🔥 Products of the Week</h2>
         <WeeklySlider
           products={weeklyProducts}
@@ -109,6 +113,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
           isLoading={isPageLoading}
         />
 
+        {/* Flaş İndirimler */}
         <FlashDeals
           products={flashDeals}
           onAdd={handleAdd}
@@ -118,6 +123,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
           isLoading={isPageLoading}
         />
 
+        {/* Ürün Detay Modal */}
         <ProductModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
