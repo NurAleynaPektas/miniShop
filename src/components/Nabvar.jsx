@@ -27,11 +27,10 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
           className={styles.logo}
           onClick={() => setIsOpen(false)}
         >
-          <img src={logo} alt="TrendPick Logo" className={styles.logoImg} />
-          <p className={styles.trendPick}>TrendPick</p>
-          {isLoggedIn && (
-            <p className={styles.welcomeUnderLogo}>👋 Welcome, {firstName}</p>
-          )}
+          <div className={styles.logoContainer}>
+            <img src={logo} alt="TrendPick Logo" className={styles.logoImg} />
+            <p className={styles.trendPick}>TrendPick</p>
+          </div>
         </NavLink>
 
         {/* Desktop Menü */}
@@ -95,6 +94,11 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
           <span className={isOpen ? styles.barActive : styles.bar}></span>
         </button>
       </nav>
+
+      {/* Welcome mesajı (alt satırda) */}
+      {isLoggedIn && (
+        <p className={styles.welcomeUnderLogo}> Welcome {firstName}🍃</p>
+      )}
 
       {/* Backdrop */}
       {isOpen && <div className={styles.backdrop} onClick={toggleMenu}></div>}
