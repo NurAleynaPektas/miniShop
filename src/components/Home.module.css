@@ -33,14 +33,6 @@
   }
 }
 
-.subheading {
-  font-size: 1.8rem;
-  margin: 40px 0 20px;
-  text-align: center;
-  color: #222;
-  font-weight: 500;
-}
-
 /* Search & Category */
 .controls {
   margin-bottom: 30px;
@@ -107,11 +99,7 @@
   }
 
   .heading {
-    font-size: 2rem;
-  }
-
-  .subheading {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .searchInput {
@@ -128,5 +116,11 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heading {
+    font-size: 1rem;
   }
 }

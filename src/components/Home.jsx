@@ -98,7 +98,7 @@ export default function Home({ onAddToCart }) {
       </div>
 
       {/* Haftanın Ürünleri */}
-      <h2 className={styles.subheading}>🔥 Haftanın Ürünleri</h2>
+      <h2 className={styles.heading}>🔥 Products of the Week</h2>
       <WeeklySlider products={weeklyProducts} onSelect={setSelectedProduct} />
 
       {/* Flaş İndirimler */}
@@ -106,7 +106,7 @@ export default function Home({ onAddToCart }) {
         products={flashDeals}
         onAdd={handleAdd}
         onSelect={setSelectedProduct}
-        title="Flaş İndirimler"
+        title="Flash Deals"
         note={flashNote}
       />
 
