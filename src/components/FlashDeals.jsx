@@ -7,7 +7,7 @@ export default function FlashDeals({
   title = "Flash Deals",
   note,
 }) {
-  if (!products.length) return null;
+  if (!products?.length) return null;
 
   return (
     <div className={styles.container}>
@@ -18,7 +18,10 @@ export default function FlashDeals({
       <div className={styles.grid}>
         {products.map((product) => (
           <div key={product.id} className={styles.card}>
-            <div className={styles.innerCard} onClick={() => onSelect(product)}>
+            <div
+              className={styles.innerCard}
+              onClick={() => onSelect?.(product)}
+            >
               <img
                 src={product.thumbnail}
                 alt={product.title}
@@ -33,7 +36,10 @@ export default function FlashDeals({
 
             <div className={styles.bottom}>
               <span className={styles.price}>{product.price} $</span>
-              <button className={styles.addBtn} onClick={() => onAdd(product)}>
+              <button
+                className={styles.addBtn}
+                onClick={() => onAdd?.(product)}
+              >
                 + Add
               </button>
             </div>

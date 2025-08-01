@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import ProductModal from "./ProductModal";
 import FlashDeals from "./FlashDeals";
 
-export default function CategoryPage({ onAddToCart }) {
-  const { categorySlug } = useParams(); // URL'den slug'ı al
+export default function CategoryPage({ onAddToCart, setIsLoading }) {
+  const { categorySlug } = useParams();
   const [allProducts, setAllProducts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,6 +16,7 @@ export default function CategoryPage({ onAddToCart }) {
   useEffect(() => {
     const load = async () => {
       try {
+        setIsLoading(true); // 🟠 loader göster
         const [products, categories] = await Promise.all([
           fetchProducts(),
           fetchCategories(),
@@ -23,17 +24,19 @@ export default function CategoryPage({ onAddToCart }) {
         setAllProducts(products);
 
         const selectedCategory = categories.find(
-          (cat) => cat.slug === categorySlug // 🔧 DÜZELTİLEN YER
+          (cat) => cat.slug === categorySlug
         );
         setCategoryName(selectedCategory?.name || "Products");
       } catch (error) {
         toast.error("Error loading category data.");
         console.error(error);
+      } finally {
+        setIsLoading(false); // 🟢 loader gizle
       }
     };
 
     load();
-  }, [categorySlug]); // slug değiştiğinde tekrar çalış
+  }, [categorySlug, setIsLoading]);
 
   const filtered = allProducts.filter(
     (p) =>

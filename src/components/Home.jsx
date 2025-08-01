@@ -7,7 +7,7 @@ import ProductModal from "./ProductModal";
 import WeeklySlider from "./WeeklySlider";
 import FlashDeals from "./FlashDeals";
 
-export default function Home({ onAddToCart }) {
+export default function Home({ onAddToCart, setIsLoading }) {
   const navigate = useNavigate();
 
   const [allProducts, setAllProducts] = useState([]);
@@ -18,6 +18,7 @@ export default function Home({ onAddToCart }) {
   useEffect(() => {
     const loadAll = async () => {
       try {
+        setIsLoading(true); // göster
         const [productsData, categoriesData] = await Promise.all([
           fetchProducts(),
           fetchCategories(),
@@ -26,21 +27,22 @@ export default function Home({ onAddToCart }) {
         setCategories(categoriesData);
       } catch (err) {
         console.error("Error loading products", err);
+        toast.error("Something went wrong while loading products.");
+      } finally {
+        setIsLoading(false); // gizle
       }
     };
     loadAll();
-  }, []);
+  }, [setIsLoading]);
 
   const weeklyProducts = allProducts.slice(0, 10);
 
   const realFlashDeals = allProducts.filter((p) => p.discountPercentage > 30);
   const flashDeals =
-    realFlashDeals.length > 0 ? realFlashDeals : allProducts.slice(10, 18); // rastgele öneri ürünler
+    realFlashDeals.length > 0 ? realFlashDeals : allProducts.slice(10, 18);
 
   const flashNote =
-    realFlashDeals.length === 0
-      ? "No flash deals available."
-      : null;
+    realFlashDeals.length === 0 ? "No flash deals available." : null;
 
   const handleAdd = (product) => {
     const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
@@ -61,7 +63,6 @@ export default function Home({ onAddToCart }) {
     <div className={styles.container}>
       <h1 className={styles.heading}>🛍️ Weekly Deals</h1>
 
-      {/* Arama ve Kategori Seçimi */}
       <div className={styles.controls}>
         <input
           className={styles.searchInput}
@@ -70,7 +71,6 @@ export default function Home({ onAddToCart }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        {/* Masaüstü: kategori butonları */}
         <div className={styles.categoryButtons}>
           {categories.map((cat) => (
             <button
@@ -83,7 +83,6 @@ export default function Home({ onAddToCart }) {
           ))}
         </div>
 
-        {/* Mobil: select dropdown */}
         <select
           className={styles.select}
           onChange={(e) => handleCategorySelect(e.target.value)}
@@ -97,11 +96,9 @@ export default function Home({ onAddToCart }) {
         </select>
       </div>
 
-      {/* Haftanın Ürünleri */}
       <h2 className={styles.heading}>🔥 Products of the Week</h2>
       <WeeklySlider products={weeklyProducts} onSelect={setSelectedProduct} />
 
-      {/* Flaş İndirimler */}
       <FlashDeals
         products={flashDeals}
         onAdd={handleAdd}
@@ -110,7 +107,6 @@ export default function Home({ onAddToCart }) {
         note={flashNote}
       />
 
-      {/* Modal */}
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}

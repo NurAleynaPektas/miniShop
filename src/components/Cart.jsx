@@ -3,7 +3,13 @@ import { useState } from "react";
 import styles from "./Cart.module.css";
 import ProductModal from "./ProductModal";
 
-export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
+export default function Cart({
+  cartItems,
+  onIncrease,
+  onDecrease,
+  onRemove,
+  setIsLoading, // 🔹 App’ten gelen loader kontrolü
+}) {
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -13,7 +19,11 @@ export default function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
   );
 
   const handleCheckout = () => {
-    navigate("/checkout", { state: { total: totalPrice.toFixed(2) } });
+    setIsLoading(true); // loader başlat
+    setTimeout(() => {
+      navigate("/checkout", { state: { total: totalPrice.toFixed(2) } });
+      setIsLoading(false); // loader kapat
+    }, 500); // 0.5 saniyelik estetik bekleme süresi
   };
 
   return (

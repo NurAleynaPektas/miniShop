@@ -6,7 +6,8 @@ import Navbar from "./components/Nabvar";
 import SignUp from "./components/SignUp";
 import Checkout from "./components/CkeckOut";
 import Cart from "./components/Cart";
-import CategoryPage from "./components/CategoryPage"; // Kategori route'u için
+import CategoryPage from "./components/CategoryPage";
+import Loader from "./components/Loader"; // Loader eklendi
 import { Toaster } from "react-hot-toast";
 
 // Özel Route bileşenleri
@@ -32,6 +33,8 @@ function App() {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
   });
+
+  const [isLoading, setIsLoading] = useState(false); // Loader state
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -93,6 +96,7 @@ function App() {
 
   return (
     <>
+      {isLoading && <Loader />} {/* Global loader gösterimi */}
       <Navbar
         isLoggedIn={isLoggedIn}
         onLogout={handleLogout}
@@ -116,12 +120,21 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
+        <Route
+          path="/"
+          element={
+            <Home onAddToCart={handleAddToCart} setIsLoading={setIsLoading} />
+          }
+        />
 
-        {/* Kategori route'u */}
         <Route
           path="/category/:categorySlug"
-          element={<CategoryPage onAddToCart={handleAddToCart} />}
+          element={
+            <CategoryPage
+              onAddToCart={handleAddToCart}
+              setIsLoading={setIsLoading}
+            />
+          }
         />
 
         <Route
@@ -133,18 +146,21 @@ function App() {
                 onIncrease={handleIncrease}
                 onDecrease={handleDecrease}
                 onRemove={handleRemoveItem}
+                setIsLoading={setIsLoading} // 🔹 ekledik
               />
             </PrivateRoute>
           }
         />
+
         <Route
           path="/checkout"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Checkout />
+              <Checkout setIsLoading={setIsLoading} />
             </PrivateRoute>
           }
         />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
