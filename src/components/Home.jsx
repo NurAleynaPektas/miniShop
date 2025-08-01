@@ -25,7 +25,7 @@ export default function Home({ onAddToCart }) {
         setAllProducts(productsData);
         setCategories(categoriesData);
       } catch (err) {
-        console.error("Veri yüklenirken hata:", err);
+        console.error("Error loading products", err);
       }
     };
     loadAll();
@@ -39,7 +39,7 @@ export default function Home({ onAddToCart }) {
 
   const flashNote =
     realFlashDeals.length === 0
-      ? "Şu anda özel indirimli ürün bulunmamaktadır. Size önerilen ürünler listelenmektedir."
+      ? "No flash deals available."
       : null;
 
   const handleAdd = (product) => {

@@ -4,7 +4,7 @@ export default function FlashDeals({
   products,
   onAdd,
   onSelect,
-  title = "Flaş İndirimler",
+  title = "Flash Deals",
   note,
 }) {
   if (!products.length) return null;
