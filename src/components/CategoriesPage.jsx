@@ -37,7 +37,9 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
   );
 
   const handleCategoryClick = (slug) => {
-    navigate(`/category/${slug}`);
+    if (slug) {
+      navigate(`/category/${slug}`);
+    }
   };
 
   const handleAdd = (product) => {
@@ -54,17 +56,33 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {" "}
         <h1 className={styles.heading}>🛍️ All Categories</h1>
-        <input
-          type="text"
-          placeholder="Search all products..."
-          className={styles.searchInput}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+
+        {/* MOBIL GÖRÜNÜM: SEARCH VE SELECT YANYANA */}
+        <div className={styles.searchFilterWrapper}>
+          <input
+            type="text"
+            placeholder="Search..."
+            className={styles.searchInput}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
+          <select
+            className={styles.mobileCategorySelect}
+            onChange={(e) => handleCategoryClick(e.target.value)}
+          >
+            <option value="">Category</option>
+            {categories.map((cat) => (
+              <option key={cat.slug} value={cat.slug}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
+      {/* MASAÜSTÜ GÖRÜNÜM: KATEGORİ BUTONLARI */}
       <div className={styles.categoryButtons}>
         {categories.map((cat) => (
           <button
