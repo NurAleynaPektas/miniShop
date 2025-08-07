@@ -67,17 +67,11 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
       <div className={styles.container}>
         {/* Başlık */}
-        <h1 className={styles.heading}>🛍️ Weekly Deals</h1>
+        <h1 className={styles.heading}>🛍️ Shop by Category </h1>
 
         {/* Arama ve Kategori Seçimi */}
         <div className={styles.controls}>
-          <input
-            className={styles.searchInput}
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-
+         
           {/* Masaüstü: Kategori butonları */}
           <div className={styles.categoryButtons}>
             {categories.map((cat) => (
