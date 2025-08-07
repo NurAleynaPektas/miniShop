@@ -64,29 +64,32 @@
   }
 }
 
-.navLink {
-  text-decoration: none;
-  font-size: 2.1rem;
-  font-weight: bold;
-  color: rgb(223, 104, 27);
-  width: 100%;
-  padding: 10px 0;
-}
-
-.navLink:hover {
-  color: #474747;
-}
-
-.active {
-  color: rgb(5, 5, 5);
-}
-
+/* Masaüstü menü bağlantıları */
 .navLinksDesktop {
   display: flex;
   gap: 20px;
   list-style: none;
 }
 
+.navLink {
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #d65a00;
+}
+
+.active {
+  color: #d65a00;
+  font-weight: 600;
+}
+
+/* Hamburger buton */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -101,11 +104,35 @@
 .barActive {
   width: 25px;
   height: 3px;
-  background-color: white;
+  background-color: #333;
   transition: 0.3s;
   border-radius: 2px;
 }
 
+/* Yandan açılan mobil menü */
+.offCanvas {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  width: 40%;            
+  max-width: 280px;     
+  background-color: #ffffff;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  border-left: 1px solid #eee;
+}
+
+
+.offCanvas.open {
+  right: 0;
+}
+
+/* Menü içeriği */
 .navLinks {
   list-style: none;
   display: flex;
@@ -113,54 +140,52 @@
   align-items: flex-start;
   justify-content: flex-start;
   height: 100%;
-  gap: 20px;
-  padding: 2rem 1.5rem;
+  gap: 8px;
   margin: 0;
+  padding: 1rem 0;
 }
 
+.navLinks li {
+  width: 100%;
+}
+
+/* Çıkış (Exit) butonu */
 .logoutListItem {
   width: 100%;
+  display: flex;
+
 }
 
 .logoutBtn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  background: rgb(207, 207, 207);
-  border: 2px solid white;
-  border-radius: 10px;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  font-size: 1.2rem;
+  color: #d65a00;
   font-weight: 600;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  font-family: inherit;
-  transition: color 0.3s ease;
-  width: 100%;
-  justify-content: flex-start;
+  padding: 4px 0;
+  width: auto;
+  transition: color 0.2s ease;
 }
 
 .logoutBtn:hover {
-  color: #f4ecec;
+  color: #333;
 }
 
-.offCanvas {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  height: 100%;
-  width: 40%;
-  max-width: 320px;
-  background-color: #ffffff;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  transition: right 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 1rem;
-}
 
-.offCanvas.open {
-  right: 0;
+.closeBtn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .backdrop {
@@ -171,15 +196,6 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 999;
-}
-
-.closeBtn {
-  align-self: flex-end;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 1rem;
 }
 
 /* Responsive */
@@ -203,28 +219,47 @@
   .welcomeUnderLogo {
     font-size: 1rem;
   }
+
+  .navLinks {
+    font-size: 0.95rem;
+    gap: 10px;
+  }
+
+  .navLink {
+    font-size: 1rem;
+    padding: 4px 0;
+  }
+
+  .logoutBtn {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+  }
 }
 
 @media (max-width: 480px) {
   .trendPick {
-    font-size: 22px;
-  }
-
-  .navLinks {
-    font-size: 1.2rem;
-    gap: 10px;
+    font-size: 1.4rem;
   }
 
   .logoImg {
     height: 60px;
   }
 
+  .navLinks {
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .navLink {
+    font-size: 0.95rem;
+  }
+
   .logoutBtn {
-    font-size: 1rem;
-    height: 40px;
+    font-size: 0.9rem;
+    padding: 5px 8px;
   }
 
   .welcomeUnderLogo {
-    display: block;
+    font-size: 0.9rem;
   }
 }
