@@ -33,7 +33,7 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
           </div>
         </NavLink>
 
-        {/* Desktop Menü */}
+        {/* Masaüstü Menü */}
         <ul className={styles.navLinksDesktop}>
           <li>
             <NavLink
@@ -45,7 +45,16 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
               Home
             </NavLink>
           </li>
-
+          <li>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
+            >
+              Categories
+            </NavLink>
+          </li>
           {isLoggedIn ? (
             <>
               <li>
@@ -83,7 +92,7 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
           )}
         </ul>
 
-        {/* Hamburger - Mobil */}
+        {/* Mobil Hamburger */}
         <button
           className={styles.hamburger}
           onClick={toggleMenu}
@@ -95,15 +104,12 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
         </button>
       </nav>
 
-      {/* Welcome mesajı (alt satırda) */}
       {isLoggedIn && (
         <p className={styles.welcomeUnderLogo}> Welcome {firstName}🍃</p>
       )}
 
-      {/* Backdrop */}
       {isOpen && <div className={styles.backdrop} onClick={toggleMenu}></div>}
 
-      {/* Mobil Menü */}
       <div className={`${styles.offCanvas} ${isOpen ? styles.open : ""}`}>
         <button className={styles.closeBtn} onClick={toggleMenu}>
           ×
@@ -118,6 +124,17 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
               }
             >
               Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/categories"
+              onClick={toggleMenu}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
+            >
+              Categories
             </NavLink>
           </li>
           {isLoggedIn ? (

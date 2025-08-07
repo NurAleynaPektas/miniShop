@@ -9,6 +9,7 @@ import Cart from "./components/Cart";
 import CategoryPage from "./components/CategoryPage";
 import Loader from "./components/Loader"; // Loader eklendi
 import { Toaster } from "react-hot-toast";
+import CategoriesPage from "./components/CategoriesPage";
 
 // Özel Route bileşenleri
 function PrivateRoute({ children, isLoggedIn }) {
@@ -126,7 +127,6 @@ function App() {
             <Home onAddToCart={handleAddToCart} setIsLoading={setIsLoading} />
           }
         />
-
         <Route
           path="/category/:categorySlug"
           element={
@@ -136,7 +136,16 @@ function App() {
             />
           }
         />
-
+       
+        <Route
+          path="/categories"
+          element={
+            <CategoriesPage
+              onAddToCart={handleAddToCart}
+              setIsLoading={setIsLoading}
+            />
+          }
+        />
         <Route
           path="/cart"
           element={
@@ -151,7 +160,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/checkout"
           element={
@@ -160,7 +168,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

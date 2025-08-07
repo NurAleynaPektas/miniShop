@@ -8,13 +8,13 @@ export default function FlashDeals({
   onSelect,
   title = "Flash Deals",
   note,
-  isLoading = false, // 🔹 dışarıdan loader kontrolü
+  isLoading = false, 
 }) {
-  const skeletonArray = Array(6).fill(null); // 6 tane kart görseli
+  const skeletonArray = Array(6).fill(null); 
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>⚡ {title}</h2>
+
       {note && <p className={styles.note}>{note}</p>}
 
       <div className={styles.grid}>

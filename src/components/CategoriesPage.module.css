@@ -1,0 +1,65 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+  margin: 40px auto 20px;
+  animation: fadeInUp 0.6s ease-in-out;
+  background: linear-gradient(to right, #fefefe, #f9f9f9);
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.categoryBtn {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.categoryBtn:hover {
+  background-color: #5a4ccf;
+}
+
+.searchInput {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.subHeading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.notFound {
+  text-align: center;
+  color: #999;
+  font-size: 1.1rem;
+}

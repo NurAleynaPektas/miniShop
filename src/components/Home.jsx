@@ -108,6 +108,8 @@ export default function Home({ onAddToCart, setIsLoading }) {
         />
 
         {/* Flaş İndirimler */}
+        <h2 className={styles.heading}>🔥 Flash Deals</h2>
+        
         <FlashDeals
           products={flashDeals}
           onAdd={handleAdd}
