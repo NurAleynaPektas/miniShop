@@ -58,19 +58,15 @@
   margin-top: 40px;
 }
 
-/* Responsive tweaks */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 1020px) {
   .searchInput {
-    width: 80%;
-  }
-
-  .heading {
-    font-size: 1.8rem;
+    width: 40%;
   }
 }
+
 @media screen and (max-width: 480px) {
   .searchInput {
-    width: 100%;
+    width: 50%;
   }
   .heading {
     font-size: 1rem;
