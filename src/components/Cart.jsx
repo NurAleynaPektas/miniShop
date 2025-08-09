@@ -29,12 +29,17 @@ export default function Cart({
   return (
     <div className={styles.cartBox}>
       {/* Yeni başlık */}
-      <h2 className={styles.cartTitle}>
-        <span className={styles.cartIcon}>🛒</span>
-        Your Shopping Basket
-        <small className={styles.cartSubtitle}>
-          Review your items before checkout
-        </small>
+      <h2
+        className={styles.cartTitle}
+        style={{
+          backgroundImage: "linear-gradient(135deg, #c85000ff, #feb47b)",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          color: "transparent",
+        }}
+      >
+        Your Cart
       </h2>
 
       {cartItems.length === 0 ? (
