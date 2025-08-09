@@ -19,10 +19,36 @@ export default function HeroSlider() {
     pauseOnHover: true,
   };
 
+  // Header sabitse (fixed navbar) üstten biraz offset verelim (px)
+  const HEADER_OFFSET = 80;
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   const banners = [
-    { img: banner1, title: "New Season", btnText: "Shop Now" },
-    { img: banner2, title: "Trend Picks", btnText: "Discover More" },
-    { img: banner3, title: "Hot Deals", btnText: "Start Shopping" },
+    {
+      img: banner1,
+      title: "New Season",
+      btnText: "Shop Now",
+      target: "categoriesSection",
+    },
+    {
+      img: banner2,
+      title: "Trend Picks",
+      btnText: "Discover More",
+      target: "weeklySection",
+    },
+    {
+      img: banner3,
+      title: "Hot Deals",
+      btnText: "Start Shopping",
+      target: "flashSection",
+    },
   ];
 
   return (
@@ -32,12 +58,18 @@ export default function HeroSlider() {
           <div key={i} className={styles.slide}>
             <img
               src={item.img}
-              alt={`Banner ${i}`}
+              alt={`Banner ${i + 1}`}
               className={styles.heroImg}
             />
             <div className={styles.overlay}>
               <h2 className={styles.title}>{item.title}</h2>
-              <button className={styles.sliderBtn}>{item.btnText}</button>
+              <button
+                className={styles.sliderBtn}
+                onClick={() => scrollToId(item.target)}
+                aria-label={item.btnText}
+              >
+                {item.btnText}
+              </button>
             </div>
           </div>
         ))}

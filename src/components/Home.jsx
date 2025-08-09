@@ -67,11 +67,12 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
       <div className={styles.container}>
         {/* Başlık */}
-        <h1 className={styles.heading}>🛍️ Shop by Category </h1>
+        <h1 id="categoriesSection" className={styles.heading}>
+          🛍️ Shop by Category
+        </h1>
 
         {/* Arama ve Kategori Seçimi */}
         <div className={styles.controls}>
-         
           {/* Masaüstü: Kategori butonları */}
           <div className={styles.categoryButtons}>
             {categories.map((cat) => (
@@ -100,7 +101,9 @@ export default function Home({ onAddToCart, setIsLoading }) {
         </div>
 
         {/* Haftanın Ürünleri */}
-        <h2 className={styles.heading}>🔥 Products of the Week</h2>
+        <h2 id="weeklySection" className={styles.heading}>
+          🔥 Products of the Week
+        </h2>
         <WeeklySlider
           products={weeklyProducts}
           onSelect={setSelectedProduct}
@@ -108,8 +111,9 @@ export default function Home({ onAddToCart, setIsLoading }) {
         />
 
         {/* Flaş İndirimler */}
-        <h2 className={styles.heading}>🔥 Flash Deals</h2>
-        
+        <h2 id="flashSection" className={styles.heading}>
+          🔥 Flash Deals
+        </h2>
         <FlashDeals
           products={flashDeals}
           onAdd={handleAdd}
