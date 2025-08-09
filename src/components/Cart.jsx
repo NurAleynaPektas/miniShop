@@ -8,7 +8,7 @@ export default function Cart({
   onIncrease,
   onDecrease,
   onRemove,
-  setIsLoading, // 🔹 App’ten gelen loader kontrolü
+  setIsLoading,
 }) {
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,18 +19,26 @@ export default function Cart({
   );
 
   const handleCheckout = () => {
-    setIsLoading(true); // loader başlat
+    setIsLoading?.(true);
     setTimeout(() => {
       navigate("/checkout", { state: { total: totalPrice.toFixed(2) } });
-      setIsLoading(false); // loader kapat
-    }, 500); // 0.5 saniyelik estetik bekleme süresi
+      setIsLoading?.(false);
+    }, 500);
   };
 
   return (
     <div className={styles.cartBox}>
-      <h2 className={styles.cartTitle}>🛒 My Cart</h2>
+      {/* Yeni başlık */}
+      <h2 className={styles.cartTitle}>
+        <span className={styles.cartIcon}>🛒</span>
+        Your Shopping Basket
+        <small className={styles.cartSubtitle}>
+          Review your items before checkout
+        </small>
+      </h2>
+
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className={styles.emptyText}>Your cart is empty.</p>
       ) : (
         <>
           <div className={styles.cartList}>
@@ -42,43 +50,64 @@ export default function Cart({
                   className={styles.image}
                   onClick={() => setSelectedProduct(item)}
                 />
+
                 <div className={styles.info}>
                   <h4>{item.title}</h4>
+
                   <div className={styles.controls}>
                     <button
+                      type="button"
                       className={styles.decrease}
                       onClick={() => onDecrease(item.id)}
+                      aria-label={`Decrease quantity of ${item.title}`}
                     >
-                      -
+                      –
                     </button>
+
                     <span className={styles.quantity}>{item.quantity}</span>
+
                     <button
+                      type="button"
                       className={styles.increase}
                       onClick={() => onIncrease(item.id)}
+                      aria-label={`Increase quantity of ${item.title}`}
                     >
                       +
                     </button>
+
                     <span className={styles.itemTotal}>
                       = {(item.price * item.quantity).toFixed(2)} $
                     </span>
-                    <button onClick={() => onRemove(item.id)}>🗑️</button>
+
+                    <button
+                      type="button"
+                      onClick={() => onRemove(item.id)}
+                      aria-label={`Remove ${item.title}`}
+                      title="Remove"
+                    >
+                      🗑️
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
           <div className={styles.totalBox}>
             <p>
               Amount 🧾 : <strong>{totalPrice.toFixed(2)} $</strong>
             </p>
-            <button onClick={handleCheckout} className={styles.checkoutButton}>
+            <button
+              type="button"
+              onClick={handleCheckout}
+              className={styles.checkoutButton}
+            >
               Buy
             </button>
           </div>
         </>
       )}
 
-      {/* Modal without add-to-cart */}
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}

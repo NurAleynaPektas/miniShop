@@ -1,34 +1,93 @@
-.cartBox {
-  background-color: #f5f5f5;
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: poppins, sans-serif;
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-weak: #dbeafe;
+  --accent: #10b981;
+  --accent-hover: #0ea371;
+  --danger: #ef4444;
+  --ring: rgba(37, 99, 235, 0.4);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --transition: 220ms ease;
 }
+
+.cartBox {
+  background-color: var(--bg);
+  padding: clamp(16px, 2.5vw, 28px);
+  margin-top: 28px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  font-family: Poppins, system-ui, sans-serif;
+  color: var(--text);
+}
+
+.emptyText {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Yeni başlık stili */
 .cartTitle {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 2rem;
-  font-weight: 600;
-  border: 2px solid #e6870b;
-  animation: fadeIn 1s ease-in-out;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
+  margin: 0 0 24px;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 800;
+  padding: 10px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.cartIcon {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.cartSubtitle {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Liste ve ürün kartları */
 .cartList {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 768px) {
+  .cartList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1200px) {
+  .cartList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .cartItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: 110px 1fr;
   align-items: center;
-  gap: 15px;
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
+  gap: 14px;
+  background: var(--surface);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.cartItem:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .image {
@@ -36,124 +95,134 @@
   height: 110px;
   object-fit: contain;
   border-radius: 12px;
-  border: 3px solid #ddd;
-  padding: 5px;
-  cursor: pointer;
+  border: 2px solid #e5e7eb;
+  padding: 6px;
+  cursor: zoom-in;
 }
 
 .info {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-left: 10px;
+}
+.info h4 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 .controls {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 5px;
+  flex-wrap: wrap;
 }
-
-.controls button {
-  padding: 6px 10px;
-  border: none;
-  color: rgb(23, 119, 236);
-  border-radius: 4px;
+.decrease,
+.increase {
+  min-width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  color: var(--primary);
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
 }
-
-.controls button:hover {
-  background-color: #84d1f0;
-  color: whitesmoke;
-  transition: 0.5s ease;
+.decrease:hover,
+.increase:hover {
+  background: #eef2ff;
 }
-
+.quantity {
+  min-width: 34px;
+  text-align: center;
+  font-weight: 700;
+}
 .itemTotal {
   margin-left: auto;
-  font-weight: bold;
+  font-weight: 700;
+}
+.controls button:last-child {
+  background: transparent;
+  border: 1px solid #f3f4f6;
+  color: var(--danger);
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.controls button:last-child:hover {
+  background: rgba(239, 68, 68, 0.08);
 }
 
 .totalBox {
-  text-align: right;
-  margin-top: 20px;
-  font-size: 1.2rem;
-}
-.quantity {
-  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 18px;
 }
 .checkoutButton {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #4caf50;
-  color: white;
+  padding: 12px 18px;
+  background-color: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
+  font-weight: 700;
 }
-
 .checkoutButton:hover {
-  background-color: #45a049;
+  background-color: var(--accent-hover);
 }
 
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 1024px) {
   .cartItem {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    position: relative;
+    grid-template-columns: 96px 1fr;
   }
-
   .image {
-    width: 100%;
-    max-width: 200px;
+    width: 96px;
+    height: 96px;
+  }
+}
+@media (max-width: 768px) {
+  .cartList {
+    grid-template-columns: 1fr;
+  }
+  .cartItem {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .image {
+    width: min(70%, 220px);
     height: auto;
-    margin-bottom: 10px;
+    margin: 0 auto;
   }
-
-  .info {
-    width: 100%;
-  }
-
-  .info h4 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-
   .controls {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
   }
-
   .itemTotal {
     width: 100%;
     text-align: center;
-    font-weight: bold;
+    margin-left: 0;
   }
-
-  .controls button {
-    padding: 6px 10px;
+  .totalBox {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  /* 🗑️ Çöp Kutusu */
-  .controls button:last-child {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: red;
-    cursor: pointer;
+  .checkoutButton {
+    width: 100%;
   }
-
-  .controls button:last-child:hover {
-    background: none;
-    color: darkred;
+}
+@media (max-width: 480px) {
+  .decrease,
+  .increase {
+    min-width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+  .quantity {
+    min-width: 30px;
   }
 }
