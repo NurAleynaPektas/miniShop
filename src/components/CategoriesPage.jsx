@@ -37,9 +37,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
   );
 
   const handleCategoryClick = (slug) => {
-    if (slug) {
-      navigate(`/category/${slug}`);
-    }
+    if (slug) navigate(`/category/${slug}`);
   };
 
   const handleAdd = (product) => {
@@ -58,7 +56,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
       <div className={styles.header}>
         <h1 className={styles.heading}>🛍️ All Categories</h1>
 
-        {/* MOBIL GÖRÜNÜM: SEARCH VE SELECT YANYANA */}
+        {/* Search + (Mobile) Category Select */}
         <div className={styles.searchFilterWrapper}>
           <input
             type="text"
@@ -82,7 +80,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
         </div>
       </div>
 
-      {/* MASAÜSTÜ GÖRÜNÜM: KATEGORİ BUTONLARI */}
+      {/* Desktop Category Buttons */}
       <div className={styles.categoryButtons}>
         {categories.map((cat) => (
           <button
