@@ -8,14 +8,13 @@
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  
+  background-color: var(--overlay);
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  
 }
 
 .loginInput {

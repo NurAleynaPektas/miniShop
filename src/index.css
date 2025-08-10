@@ -11,6 +11,7 @@
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
   --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
   --transition: 220ms ease;
+  --overlay: rgba(226, 226, 226, 0.6);
 }
 
 /* Dark */
@@ -18,7 +19,7 @@
   --brand: #ffa45b;
   --text: #c7c5c4;
   --text-muted: #000000;
-  --overlay: rgba(174, 171, 171, 0.6);
+  --overlay: rgba(4, 4, 11, 0.474);
   --bg: #0f1115;
   --surface: #141820;
   --surface-2: #0f141b;

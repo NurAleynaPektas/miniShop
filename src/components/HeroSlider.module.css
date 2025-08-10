@@ -13,6 +13,7 @@
   height: 500px;
   overflow: hidden;
   border-radius: 16px;
+
 }
 
 .heroImg {
@@ -59,6 +60,7 @@
   font-weight: bold;
   margin-bottom: 20px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  color: rgb(189, 188, 188) ;
 }
 
 /* Buton */

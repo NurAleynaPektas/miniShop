@@ -13,7 +13,6 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isPageLoading, setIsPageLoading] = useState(true);
 
