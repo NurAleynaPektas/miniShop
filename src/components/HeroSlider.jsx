@@ -19,15 +19,10 @@ export default function HeroSlider() {
     pauseOnHover: true,
   };
 
-  // Header sabitse (fixed navbar) üstten biraz offset verelim (px)
-  const HEADER_OFFSET = 80;
-
   const scrollToId = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const y =
-      el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const banners = [

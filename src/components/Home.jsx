@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import ProductModal from "./ProductModal";
 import WeeklySlider from "./WeeklySlider";
 import FlashDeals from "./FlashDeals";
-import HeroSlider from "./HeroSlider"; // Yeni vitrin slider'ı eklendi
+import HeroSlider from "./HeroSlider";
 
 export default function Home({ onAddToCart, setIsLoading }) {
   const navigate = useNavigate();
@@ -56,73 +56,76 @@ export default function Home({ onAddToCart, setIsLoading }) {
   };
 
   const handleCategorySelect = (slug) => {
+    if (!slug) return;
     navigate(`/category/${slug}`);
   };
 
   return (
     <div>
-      {/* Vitrin slider (Hero Slider) */}
+      {/* Hero / Vitrin */}
       <HeroSlider />
 
       <div className={styles.container}>
-        {/* Başlık */}
-        <h1 id="categoriesSection" className={styles.heading}>
-          🛍️ Shop by Category
-        </h1>
+        {/* CATEGORIES SECTION */}
+        <section id="categoriesSection" className={styles.section}>
+          <h1 className={styles.heading}>🛍️ Shop by Category</h1>
 
-        {/* Arama ve Kategori Seçimi */}
-        <div className={styles.controls}>
-          {/* Masaüstü: Kategori butonları */}
-          <div className={styles.categoryButtons}>
-            {categories.map((cat) => (
-              <button
-                key={cat.slug}
-                className={styles.categoryBtn}
-                onClick={() => handleCategorySelect(cat.slug)}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
+          <div className={styles.controls}>
+            {/* Desktop: butonlar */}
+            <div className={styles.categoryButtons}>
+              {categories.map((cat) => (
+                <button
+                  key={cat.slug}
+                  className={styles.categoryBtn}
+                  onClick={() => handleCategorySelect(cat.slug)}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
 
-          {/* Mobil: Kategori dropdown */}
-          <select
-            className={styles.select}
-            onChange={(e) => handleCategorySelect(e.target.value)}
-          >
-            <option value="">Select category</option>
-            {categories.map((cat) => (
-              <option key={cat.slug} value={cat.slug}>
-                {cat.name}
+            {/* Mobile: dropdown */}
+            <select
+              className={styles.select}
+              onChange={(e) => handleCategorySelect(e.target.value)}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select category
               </option>
-            ))}
-          </select>
-        </div>
+              {categories.map((cat) => (
+                <option key={cat.slug} value={cat.slug}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </section>
 
-        {/* Haftanın Ürünleri */}
-        <h2 id="weeklySection" className={styles.heading}>
-          🔥 Products of the Week
-        </h2>
-        <WeeklySlider
-          products={weeklyProducts}
-          onSelect={setSelectedProduct}
-          isLoading={isPageLoading}
-        />
+        {/* WEEKLY SECTION */}
+        <section id="weeklySection" className={styles.section}>
+          <h2 className={styles.heading}>🔥 Products of the Week</h2>
+          <WeeklySlider
+            products={weeklyProducts}
+            onSelect={setSelectedProduct}
+            isLoading={isPageLoading}
+          />
+        </section>
 
-        {/* Flaş İndirimler */}
-        <h2 id="flashSection" className={styles.heading}>
-          🔥 Flash Deals
-        </h2>
-        <FlashDeals
-          products={flashDeals}
-          onAdd={handleAdd}
-          onSelect={setSelectedProduct}
-          title="Flash Deals"
-          note={flashNote}
-          isLoading={isPageLoading}
-        />
+        {/* FLASH DEALS SECTION */}
+        <section id="flashSection" className={styles.section}>
+          <h2 className={styles.heading}>⚡ Flash Deals</h2>
+          <FlashDeals
+            products={flashDeals}
+            onAdd={handleAdd}
+            onSelect={setSelectedProduct}
+            title="Flash Deals"
+            note={flashNote}
+            isLoading={isPageLoading}
+          />
+        </section>
 
-        {/* Ürün Detay Modal */}
+        {/* PRODUCT MODAL */}
         <ProductModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}

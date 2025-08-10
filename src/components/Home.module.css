@@ -1,7 +1,19 @@
+:root {
+  --header-h: 80px; /* Navbar yüksekliği */
+}
+
+/* Genel container */
 .container {
   padding: 0 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Her bölüm için offset */
+#categoriesSection,
+#weeklySection,
+#flashSection {
+  scroll-margin-top: var(--header-h);
 }
 
 /* Sayfa başlığı */
@@ -19,6 +31,7 @@
 
 /* Arama ve kategori alanı */
 .controls {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
@@ -36,6 +49,7 @@
   outline: none;
   transition: border 0.2s ease;
 }
+
 .searchInput:focus {
   border-color: #06a31b;
 }
@@ -47,6 +61,7 @@
   justify-content: center;
   gap: 12px;
 }
+
 .categoryBtn {
   background: linear-gradient(135deg, #eee, #ddd);
   border: none;
@@ -56,6 +71,7 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+
 .categoryBtn:hover {
   background: linear-gradient(135deg, #ccc, #bbb);
   transform: scale(1.05);
