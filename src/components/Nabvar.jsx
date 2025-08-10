@@ -105,7 +105,24 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
       </nav>
 
       {isLoggedIn && (
-        <p className={styles.welcomeUnderLogo}> Welcome {firstName}🍃</p>
+        <p className={styles.welcomeUnderLogo}>
+          {"Welcome ".split("").map((char, i) => (
+            <span key={i} style={{ animationDelay: `${i * 0.05}s` }}>
+              {char}
+            </span>
+          ))}
+          {firstName.split("").map((char, i) => (
+            <span
+              key={`name-${i}`}
+              style={{ animationDelay: `${(i + 8) * 0.05}s` }}
+            >
+              {char}
+            </span>
+          ))}
+          <span style={{ animationDelay: `${(firstName.length + 9) * 0.05}s` }}>
+            🍃
+          </span>
+        </p>
       )}
 
       {isOpen && <div className={styles.backdrop} onClick={toggleMenu}></div>}
