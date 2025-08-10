@@ -1,62 +1,81 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  position: relative;
-  flex-wrap: wrap;
+/* ========== Design Tokens ========== */
+:root {
+  --brand: #d65a00;
+  --text: #222;
+  --text-muted: #555;
+  --bg: #fff;
+  --ring: rgba(214, 90, 0, 0.35);
+  --radius: 14px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --transition: 220ms ease;
 }
 
+/* ========== Navbar ========== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  position: relative;
+  flex-wrap: nowrap;
+  background: var(--bg);
+}
+
+/* Logo */
 .logo {
   text-decoration: none;
-  color: rgb(223, 104, 27);
+  color: var(--brand);
   display: flex;
   align-items: center;
 }
 
 .logoContainer {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
 .logoImg {
-  height: 100px;
-  object-fit: contain;
+  height: 56px;
+  width: 56px;
+  object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: transform var(--transition);
+}
+
+.trendPick {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform var(--transition), color var(--transition);
 }
 
 .logoImg:hover,
 .trendPick:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px) scale(1.02);
 }
 
-.trendPick {
-  font-size: 2.6rem;
-  font-weight: bold;
-  margin: 0;
-  line-height: 1;
-  cursor: pointer;
-}
-
+/* Welcome line under logo */
 .welcomeUnderLogo {
   width: 100%;
-  margin-left: 30px;
-  font-size: 1.3rem;
+  margin-left: 12px;
+  margin-top: 4px;
+  font-size: 1rem;
   font-weight: 500;
-  color: #555;
-  margin-top: 5px;
-  animation: fadeIn 0.4s ease-in-out;
+  color: var(--text-muted);
+  animation: fadeIn 0.25s ease-in-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
   to {
     opacity: 1;
@@ -64,202 +83,275 @@
   }
 }
 
-/* Masaüstü menü bağlantıları */
+/* ========== Desktop Nav Links ========== */
 .navLinksDesktop {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .navLink {
   text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   color: #333;
-  padding: 4px 0;
-  transition: color 0.2s ease;
+  padding: 6px 2px;
+  border-radius: 8px;
+  transition: color var(--transition), background-color var(--transition);
 }
 
 .navLink:hover {
-  color: #d65a00;
+  color: var(--brand);
+  background: rgba(214, 90, 0, 0.06);
 }
 
 .active {
-  color: #d65a00;
-  font-weight: 600;
+  color: var(--brand);
 }
 
-/* Hamburger buton */
+/* ========== Hamburger ========== */
 .hamburger {
   display: none;
   flex-direction: column;
+  gap: 5px;
   cursor: pointer;
   border: none;
   background: none;
-  padding: 0;
-  gap: 5px;
+  padding: 6px;
+  border-radius: 10px;
+  transition: background-color var(--transition);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.hamburger:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .bar,
 .barActive {
-  width: 25px;
-  height: 3px;
+  width: 22px;
+  height: 2.5px;
   background-color: #333;
-  transition: 0.3s;
   border-radius: 2px;
+  transition: transform 200ms ease, opacity 200ms ease,
+    background-color var(--transition);
 }
 
-/* Yandan açılan mobil menü */
+/* X animation (when .barActive is applied) */
+.hamburger .barActive:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger .barActive:nth-child(2) {
+  opacity: 0;
+}
+.hamburger .barActive:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========== Off-Canvas (Mobile Menu) ========== */
 .offCanvas {
   position: fixed;
   top: 0;
   right: -100%;
   height: 100%;
-  width: 40%;            
-  max-width: 280px;     
+  width: 40%;
   background-color: #ffffff;
-  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.14);
   z-index: 1000;
-  transition: right 0.3s ease-in-out;
+  transition: right 260ms ease-in-out;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1rem;
+  padding: 20px 16px 16px;
   border-left: 1px solid #eee;
 }
-
 
 .offCanvas.open {
   right: 0;
 }
 
-/* Menü içeriği */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  align-self: flex-end;
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  padding: 4px 6px;
+  border-radius: 8px;
+  transition: background-color var(--transition), color var(--transition);
+}
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Off-canvas menu content */
 .navLinks {
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: flex-start;
   height: 100%;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
-  padding: 1rem 0;
+  padding: 40px 0 0; /* leave room for close button */
 }
 
 .navLinks li {
   width: 100%;
 }
 
-/* Çıkış (Exit) butonu */
+.navLinks .navLink {
+  display: block;
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text);
+}
+.navLinks .navLink:hover {
+  background: rgba(214, 90, 0, 0.06);
+  color: var(--brand);
+}
+
+/* Exit button row */
 .logoutListItem {
   width: 100%;
   display: flex;
-
+  margin-top: 6px;
 }
 
 .logoutBtn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: #d65a00;
-  font-weight: 600;
-  padding: 4px 0;
-  width: auto;
-  transition: color 0.2s ease;
+  font-size: 1rem; /* daha küçük, tutarlı */
+  color: var(--brand);
+  font-weight: 700;
+  padding: 8px 6px;
+  border-radius: 10px;
+  transition: background-color var(--transition), color var(--transition);
 }
-
 .logoutBtn:hover {
   color: #333;
+  background: rgba(214, 90, 0, 0.06);
 }
 
-
-.closeBtn {
-  align-self: flex-end;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #444;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
+/* Backdrop */
 .backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
 }
 
-/* Responsive */
+/* ========== Accessibility Focus States ========== */
+.navLink:focus-visible,
+.logoutBtn:focus-visible,
+.closeBtn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ========== Responsive ========== */
+@media (min-width: 1024px) {
+  .logoImg {
+    height: 64px;
+    width: 64px;
+  }
+  .trendPick {
+    font-size: 1.8rem;
+  }
+  .navLink {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navLinksDesktop {
+    gap: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
 
   .logoImg {
-    height: 90px;
+    height: 52px;
+    width: 52px;
   }
-
   .trendPick {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 
   .navLinksDesktop {
     display: none;
   }
-
   .welcomeUnderLogo {
-    font-size: 1rem;
-  }
-
-  .navLinks {
     font-size: 0.95rem;
-    gap: 10px;
+    margin-left: 8px;
   }
 
-  .navLink {
-    font-size: 1rem;
-    padding: 4px 0;
+  
+  .navLinks .navLink {
+    font-size: 0.98rem;
+    padding: 10px 10px;
   }
-
   .logoutBtn {
-    font-size: 0.95rem;
-    padding: 6px 10px;
+    font-size: 0.98rem;
+    padding: 8px 8px;
   }
 }
 
 @media (max-width: 480px) {
-  .trendPick {
-    font-size: 1.4rem;
-  }
-
   .logoImg {
-    height: 60px;
+    height: 48px;
+    width: 48px;
   }
-
-  .navLinks {
-    font-size: 0.9rem;
-    gap: 8px;
-  }
-
-  .navLink {
-    font-size: 0.95rem;
-  }
-
-  .logoutBtn {
-    font-size: 0.9rem;
-    padding: 5px 8px;
+  .trendPick {
+    font-size: 1.25rem;
   }
 
   .welcomeUnderLogo {
     font-size: 0.9rem;
+    margin-left: 6px;
+  }
+
+  
+  .navLinks {
+    gap: 6px;
+  }
+  .navLinks .navLink {
+    font-size: 0.95rem;
+  }
+  .logoutBtn {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========== Motion Preferences ========== */
+@media (prefers-reduced-motion: reduce) {
+  .logoImg,
+  .trendPick,
+  .navLink,
+  .offCanvas,
+  .bar,
+  .barActive {
+    transition: none !important;
   }
 }
