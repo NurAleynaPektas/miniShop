@@ -86,7 +86,23 @@
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--text);
+
+
 }
+.welcomeUnderLogo {
+  display: inline-flex;            
+  align-items: baseline;
+}
+
+.word {
+  display: inline-flex;           
+  margin-right: 0.7ch;             
+}
+
+.word:last-child {
+  margin-right: 0;                 
+}
+
 .welcomeUnderLogo span {
   display: inline-block;
   opacity: 0;

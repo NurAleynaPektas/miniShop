@@ -125,21 +125,41 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
 
       {isLoggedIn && (
         <p className={styles.welcomeUnderLogo}>
-          {"Welcome ".split("").map((char, i) => (
-            <span key={i} style={{ animationDelay: `${i * 0.05}s` }}>
-              {char}
-            </span>
-          ))}
-          {firstName.split("").map((char, i) => (
+          {/* WELCOME */}
+          <span className={styles.word}>
+            {"Welcome".split("").map((char, i) => (
+              <span key={`w-${i}`} style={{ animationDelay: `${i * 0.05}s` }}>
+                {char}
+              </span>
+            ))}
+          </span>
+
+          {/* NAME */}
+          <span className={styles.word}>
+            {firstName.split("").map((char, i) => (
+              <span
+                key={`n-${i}`}
+                style={{
+                  // Welcome 7 harf + 1 harflik “duraklama” sonra başlasın
+                  animationDelay: `${("Welcome".length + 1 + i) * 0.05}s`,
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+
+          {/* EMOJI */}
+          <span className={styles.word}>
             <span
-              key={`name-${i}`}
-              style={{ animationDelay: `${(i + 8) * 0.05}s` }}
+              style={{
+                animationDelay: `${
+                  ("Welcome".length + 1 + firstName.length) * 0.05
+                }s`,
+              }}
             >
-              {char}
+              🍃
             </span>
-          ))}
-          <span style={{ animationDelay: `${(firstName.length + 9) * 0.05}s` }}>
-            🍃
           </span>
         </p>
       )}
