@@ -35,3 +35,19 @@ html, body {
   color: var(--text);
   transition: background-color var(--transition), color var(--transition);
 }
+/* Tam yükseklik */
+html, body, #root {
+  height: 100%;
+}
+
+/* Sayfa iskeleti */
+.page {
+  min-height: 100dvh;         
+  display: flex;
+  flex-direction: column;
+}
+
+
+.page main {
+  flex: 1;
+}

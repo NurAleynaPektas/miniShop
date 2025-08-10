@@ -1,0 +1,110 @@
+.footer {
+  background: linear-gradient(135deg, #6f38d6 0%, #cf6a2a 100%);
+  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 10px 25px;
+  margin-top: 40px;
+}
+
+/* --- Mobil varsayılan: 2 sütun + altta links --- */
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "brand contact"
+    "links links";
+  align-items: start;
+}
+
+.brand {
+  grid-area: brand;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.name {
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1.1;
+}
+.role {
+  font-size: 0.72rem;
+  line-height: 1.15;
+  opacity: 0.95;
+}
+
+.contact {
+  grid-area: contact;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+.link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  opacity: 0.95;
+  word-break: break-word;
+}
+.link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.links {
+  grid-area: links;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.links .link {
+  font-size: 0.74rem;
+}
+
+.copy {
+  margin-top: 6px;
+  padding-top: 6px;
+  font-size: 0.65rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  opacity: 0.9;
+}
+
+/* --- Tablet --- */
+@media (min-width: 600px) {
+  .footer {
+    padding: 15px 25px;
+  }
+  .name {
+    font-size: 0.95rem;
+  }
+  .role,
+  .contact .link,
+  .links .link {
+    font-size: 0.78rem;
+  }
+}
+
+/* --- Desktop: tek satırda 3 sütun --- */
+@media (min-width: 992px) {
+  .footer {
+    padding: 30px 50px;
+  }
+  .top {
+    grid-template-columns: 1.2fr 1fr 0.8fr;
+    grid-template-areas: "brand contact links";
+    align-items: center;
+  }
+  .contact {
+    text-align: left;
+  }
+  .links {
+    justify-content: flex-end;
+  }
+  .copy {
+    font-size: 0.72rem;
+    padding-top: 8px;
+  }
+}
