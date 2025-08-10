@@ -46,7 +46,7 @@
     rgba(0, 0, 0, 0.3),
     rgba(0, 0, 0, 0.6)
   );
-  color: rgb(209, 208, 208);
+  color: var(--text);
   text-align: center;
   padding: 20px;
   z-index: 2;

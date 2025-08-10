@@ -2,11 +2,13 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import logo from "../img/trendPick (2).png";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiMoon, FiSun } from "react-icons/fi";
+import { useTheme } from "../theme/ThemeProvider";
 
 export default function Navbar({ isLoggedIn, onLogout, userName }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -90,6 +92,23 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
               </NavLink>
             </li>
           )}
+
+          {/* Tema Düğmesi */}
+          <li>
+            <button
+              type="button"
+              className={styles.themeToggle}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+            >
+              {theme === "dark" ? <FiSun /> : <FiMoon />}
+            </button>
+          </li>
         </ul>
 
         {/* Mobil Hamburger */}
@@ -204,6 +223,23 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
               </li>
             </>
           )}
+
+          {/* Mobil Tema Düğmesi */}
+          <li>
+            <button
+              type="button"
+              className={styles.themeToggle}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+            >
+              {theme === "dark" ? <FiSun /> : <FiMoon />}
+            </button>
+          </li>
         </ul>
       </div>
     </>

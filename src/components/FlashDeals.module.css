@@ -9,7 +9,7 @@
 
 .note {
   text-align: center;
-  color: #666;
+  color: var(--text);
   font-style: italic;
   margin-bottom: 10px;
 }
@@ -19,7 +19,7 @@
   max-width: 200px;
   border: 1px solid #ccc;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: var(--surface);
   padding: 10px;
   text-align: center;
   transition: transform 0.3s ease;

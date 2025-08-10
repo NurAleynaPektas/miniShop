@@ -15,7 +15,7 @@
   padding: 20px 30px;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  color: #222;
+  color: var(--text);
   margin: 40px auto 30px auto;
   max-width: 600px;
   text-align: center;

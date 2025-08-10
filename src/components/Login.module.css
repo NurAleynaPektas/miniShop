@@ -8,12 +8,14 @@
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  
 }
 
 .loginInput {
@@ -52,6 +54,7 @@
   animation: fadeIn 1s ease-in-out;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
   border-radius: 12px;
+  color: var(--text);
 }
 .signupLink {
   margin-top: 16px;

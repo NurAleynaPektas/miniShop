@@ -1,0 +1,36 @@
+/* Light (default) */
+:root {
+  --brand: #d65a00;
+  --text: #222;
+  --text-muted: #efebeb;
+  --bg: #ffffff;
+  --ring: rgba(214, 90, 0, 0.35);
+  --surface: #ffffff;
+  --surface-2: #f7f7f8;
+  --border: #eeeeee;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --transition: 220ms ease;
+}
+
+/* Dark */
+:root[data-theme="dark"] {
+  --brand: #ffa45b;
+  --text: #c7c5c4;
+  --text-muted: #000000;
+  --overlay: rgba(174, 171, 171, 0.6);
+  --bg: #0f1115;
+  --surface: #141820;
+  --surface-2: #0f141b;
+  --border: #222834;
+  --ring: rgba(255, 164, 91, 0.45);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.6);
+  --shadow-md: 0 12px 28px rgba(0,0,0,0.7);
+}
+
+/* Body arka plan / yazı rengi */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color var(--transition), color var(--transition);
+}
