@@ -1,6 +1,26 @@
-.loaderWrapper {
+.overlay {
+  position: fixed;
+  inset: 0;               
+  z-index: 9999;          
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 300px;
+  justify-content: center;
+  pointer-events: all;    
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.28);        
+  backdrop-filter: blur(1px);         
+}
+
+
+:root[data-theme="dark"] .backdrop {
+  background: rgba(0,0,0,0.45);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { backdrop-filter: none; }
 }
