@@ -331,6 +331,12 @@
     font-size: 0.9rem;
     margin-left: 6px;
   }
+.closeBtn{
+  font-size: 1.8rem;
+  padding: 4px 6px;
+  color: #f17c07;
+}
+
 
   
   .navLinks {
@@ -341,6 +347,7 @@
   }
   .logoutBtn {
     font-size: 0.95rem;
+  
   }
 }
 
