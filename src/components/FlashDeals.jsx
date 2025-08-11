@@ -8,15 +8,16 @@ export default function FlashDeals({
   onSelect,
   title = "Flash Deals",
   note,
-  isLoading = false, 
+  isLoading = false,
+  limit = 18, 
 }) {
-  const skeletonArray = Array(6).fill(null); 
+  const skeletonArray = Array(limit).fill(null); 
+
+  const list = products?.slice(0, limit) ?? []; 
 
   return (
     <div className={styles.container}>
-
       {note && <p className={styles.note}>{note}</p>}
-
       <div className={styles.grid}>
         {isLoading
           ? skeletonArray.map((_, index) => (
@@ -31,7 +32,7 @@ export default function FlashDeals({
                 </div>
               </div>
             ))
-          : products.map((product) => (
+          : list.map((product) => (
               <div key={product.id} className={styles.card}>
                 <div
                   className={styles.innerCard}
@@ -48,7 +49,6 @@ export default function FlashDeals({
                       : product.title}
                   </h3>
                 </div>
-
                 <div className={styles.bottom}>
                   <span className={styles.price}>{product.price} $</span>
                   <button

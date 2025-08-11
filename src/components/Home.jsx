@@ -1,4 +1,3 @@
-// src/components/Home.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts, fetchCategories } from "../api/productApi";
@@ -39,8 +38,8 @@ export default function Home({ onAddToCart, setIsLoading }) {
     loadAll();
   }, [setIsLoading]);
 
-  // --- BURASI: Güvenli scroll (login sonrası, main container, navbar offset v.b.) ---
-  const NAVBAR_OFFSET = 80; // Navbar yüksekliğini burada ayarla
+  
+  const NAVBAR_OFFSET = 80;
 
   const getScrollRoot = () => {
     const main = document.querySelector("main");
@@ -52,7 +51,6 @@ export default function Home({ onAddToCart, setIsLoading }) {
     const el = document.getElementById(id);
     if (!el) return;
 
-    // Her ihtimale karşı body kilitliyse aç
     if (getComputedStyle(document.body).overflow !== "visible") {
       document.body.style.overflow = "visible";
     }
@@ -79,12 +77,15 @@ export default function Home({ onAddToCart, setIsLoading }) {
       root.scrollTo({ top: targetTop, behavior: "smooth" });
     }
   };
-  // --- /scroll ---
+  
 
   const weeklyProducts = allProducts.slice(0, 10);
+
+  
   const realFlashDeals = allProducts.filter((p) => p.discountPercentage > 30);
-  const flashDeals =
-    realFlashDeals.length > 0 ? realFlashDeals : allProducts.slice(10, 18);
+
+  
+  const flashDeals = realFlashDeals.length > 0 ? realFlashDeals : allProducts;
   const flashNote = realFlashDeals.length === 0 ? "" : null;
 
   const handleAdd = (product) => {
@@ -165,6 +166,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
             title="Flash Deals"
             note={flashNote}
             isLoading={isPageLoading}
+            limit={18} 
           />
         </section>
 
