@@ -1,3 +1,4 @@
+// src/components/Home.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts, fetchCategories } from "../api/productApi";
@@ -38,6 +39,48 @@ export default function Home({ onAddToCart, setIsLoading }) {
     loadAll();
   }, [setIsLoading]);
 
+  // --- BURASI: Güvenli scroll (login sonrası, main container, navbar offset v.b.) ---
+  const NAVBAR_OFFSET = 80; // Navbar yüksekliğini burada ayarla
+
+  const getScrollRoot = () => {
+    const main = document.querySelector("main");
+    if (main && getComputedStyle(main).overflowY !== "visible") return main;
+    return window;
+  };
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Her ihtimale karşı body kilitliyse aç
+    if (getComputedStyle(document.body).overflow !== "visible") {
+      document.body.style.overflow = "visible";
+    }
+
+    const root = getScrollRoot();
+    const containerRect =
+      root === window ? { top: 0 } : root.getBoundingClientRect();
+    const targetRect = el.getBoundingClientRect();
+
+    const currentScrollTop =
+      root === window
+        ? window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop ||
+          0
+        : root.scrollTop;
+
+    const targetTop =
+      targetRect.top - containerRect.top + currentScrollTop - NAVBAR_OFFSET;
+
+    if (root === window) {
+      window.scrollTo({ top: targetTop, behavior: "smooth" });
+    } else {
+      root.scrollTo({ top: targetTop, behavior: "smooth" });
+    }
+  };
+  // --- /scroll ---
+
   const weeklyProducts = allProducts.slice(0, 10);
   const realFlashDeals = allProducts.filter((p) => p.discountPercentage > 30);
   const flashDeals =
@@ -63,7 +106,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
   return (
     <div>
       {/* Hero / Vitrin */}
-      <HeroSlider />
+      <HeroSlider onGo={scrollToId} />
 
       <div className={styles.container}>
         {/* CATEGORIES SECTION */}

@@ -1,3 +1,4 @@
+// src/components/HeroSlider.jsx
 import Slider from "react-slick";
 import styles from "./HeroSlider.module.css";
 import banner1 from "../img/banner1.png";
@@ -6,7 +7,7 @@ import banner3 from "../img/banner3.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function HeroSlider() {
+export default function HeroSlider({ onGo }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -17,12 +18,6 @@ export default function HeroSlider() {
     autoplaySpeed: 4000,
     arrows: false,
     pauseOnHover: true,
-  };
-
-  const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const banners = [
@@ -60,7 +55,7 @@ export default function HeroSlider() {
               <h2 className={styles.title}>{item.title}</h2>
               <button
                 className={styles.sliderBtn}
-                onClick={() => scrollToId(item.target)}
+                onClick={() => (onGo ? onGo(item.target) : null)}
                 aria-label={item.btnText}
               >
                 {item.btnText}
