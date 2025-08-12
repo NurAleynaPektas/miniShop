@@ -6,6 +6,15 @@ import toast from "react-hot-toast";
 import ProductModal from "./ProductModal";
 import FlashDeals from "./FlashDeals";
 
+const toSlug = (s = "") =>
+  s
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 export default function CategoryPage({ onAddToCart, setIsLoading }) {
   const { categorySlug } = useParams();
   const [allProducts, setAllProducts] = useState([]);
@@ -16,7 +25,7 @@ export default function CategoryPage({ onAddToCart, setIsLoading }) {
   useEffect(() => {
     const load = async () => {
       try {
-        setIsLoading(true); // 🟠 loader göster
+        setIsLoading(true);
         const [products, categories] = await Promise.all([
           fetchProducts(),
           fetchCategories(),
@@ -26,12 +35,14 @@ export default function CategoryPage({ onAddToCart, setIsLoading }) {
         const selectedCategory = categories.find(
           (cat) => cat.slug === categorySlug
         );
-        setCategoryName(selectedCategory?.name || "Products");
+        setCategoryName(
+          selectedCategory?.name || selectedCategory?.label || "Products"
+        );
       } catch (error) {
         toast.error("Error loading category data.");
         console.error(error);
       } finally {
-        setIsLoading(false); // 🟢 loader gizle
+        setIsLoading(false);
       }
     };
 
@@ -40,8 +51,8 @@ export default function CategoryPage({ onAddToCart, setIsLoading }) {
 
   const filtered = allProducts.filter(
     (p) =>
-      p.category === categorySlug &&
-      p.title.toLowerCase().includes(searchTerm.toLowerCase())
+      toSlug(p.category) === categorySlug &&
+      (p.title || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleAdd = (product) => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./SignUp.module.css";
 import { registerUser } from "../api/authApi";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom"; // 👈 Link eklenmeli
+import { Link } from "react-router-dom"; 
 
 export default function SignUp() {
   const [formData, setFormData] = useState({

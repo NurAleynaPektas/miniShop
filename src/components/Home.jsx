@@ -38,7 +38,6 @@ export default function Home({ onAddToCart, setIsLoading }) {
     loadAll();
   }, [setIsLoading]);
 
-  
   const NAVBAR_OFFSET = 80;
 
   const getScrollRoot = () => {
@@ -77,14 +76,11 @@ export default function Home({ onAddToCart, setIsLoading }) {
       root.scrollTo({ top: targetTop, behavior: "smooth" });
     }
   };
-  
 
   const weeklyProducts = allProducts.slice(0, 10);
 
-  
   const realFlashDeals = allProducts.filter((p) => p.discountPercentage > 30);
 
-  
   const flashDeals = realFlashDeals.length > 0 ? realFlashDeals : allProducts;
   const flashNote = realFlashDeals.length === 0 ? "" : null;
 
@@ -123,7 +119,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
                   className={styles.categoryBtn}
                   onClick={() => handleCategorySelect(cat.slug)}
                 >
-                  {cat.name}
+                  {cat.name || cat.label || cat.slug}
                 </button>
               ))}
             </div>
@@ -139,7 +135,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
               </option>
               {categories.map((cat) => (
                 <option key={cat.slug} value={cat.slug}>
-                  {cat.name}
+                  {cat.name || cat.label || cat.slug}
                 </option>
               ))}
             </select>
@@ -166,7 +162,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
             title="Flash Deals"
             note={flashNote}
             isLoading={isPageLoading}
-            limit={18} 
+            limit={18}
           />
         </section>
 

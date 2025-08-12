@@ -6,11 +6,11 @@ export default function CheckOut({ setIsLoading }) {
   const total = location.state?.total;
 
   const handlePayment = () => {
-    setIsLoading(true); // Loader’ı aç
+    setIsLoading(true); 
     setTimeout(() => {
-      setIsLoading(false); // Loader’ı kapat
+      setIsLoading(false); 
       alert("✅ Payment completed successfully!");
-    }, 1000); // 1 saniyelik estetik yükleme süresi
+    }, 1000); 
   };
 
   return (

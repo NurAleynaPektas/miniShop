@@ -6,7 +6,6 @@
   margin-top: 40px;
 }
 
-/* --- Mobil varsayılan: 2 sütun + altta links --- */
 .top {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -87,7 +86,7 @@
   }
 }
 
-/* --- Desktop: tek satırda 3 sütun --- */
+
 @media (min-width: 992px) {
   .footer {
     padding: 30px 50px;

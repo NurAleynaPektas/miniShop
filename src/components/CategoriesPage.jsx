@@ -25,6 +25,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
         setCategories(allCategories);
       } catch (error) {
         toast.error("Error loading data.");
+        console.error(error);
       } finally {
         setIsLoading(false);
       }
@@ -33,7 +34,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
   }, [setIsLoading]);
 
   const filteredProducts = products.filter((p) =>
-    p.title.toLowerCase().includes(searchTerm.toLowerCase())
+    (p.title || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleCategoryClick = (slug) => {
@@ -69,11 +70,14 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
           <select
             className={styles.mobileCategorySelect}
             onChange={(e) => handleCategoryClick(e.target.value)}
+            defaultValue=""
           >
-            <option value="">Category</option>
+            <option value="" disabled>
+              Category
+            </option>
             {categories.map((cat) => (
               <option key={cat.slug} value={cat.slug}>
-                {cat.name}
+                {cat.name || cat.label || cat.slug}
               </option>
             ))}
           </select>
@@ -88,7 +92,7 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
             onClick={() => handleCategoryClick(cat.slug)}
             className={styles.categoryBtn}
           >
-            {cat.name}
+            {cat.name || cat.label || cat.slug}
           </button>
         ))}
       </div>

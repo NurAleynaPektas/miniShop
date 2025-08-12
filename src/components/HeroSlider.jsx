@@ -1,4 +1,3 @@
-// src/components/HeroSlider.jsx
 import Slider from "react-slick";
 import styles from "./HeroSlider.module.css";
 import banner1 from "../img/banner1.png";

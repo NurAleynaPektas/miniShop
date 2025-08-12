@@ -1,4 +1,4 @@
-/* ========== Design Tokens ========== */
+
 :root {
   --brand: #d65a00;
   --text: #222;
@@ -11,7 +11,7 @@
   --transition: 220ms ease;
 }
 
-/* ========== Navbar ========== */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@
   background: var(--bg);
 }
 
-/* Logo */
+
 .logo {
   text-decoration: none;
   color: var(--brand);
@@ -80,7 +80,7 @@
   transform: translateY(-1px) scale(1.02);
 }
 
-/* Welcome line under logo */
+
 .welcomeUnderLogo {
   display: inline-block;
   font-size: 1.3rem;
@@ -134,7 +134,7 @@
   }
 }
 
-/* ========== Desktop Nav Links ========== */
+
 .navLinksDesktop {
   display: flex;
   gap: 16px;
@@ -195,7 +195,6 @@
     background-color var(--transition);
 }
 
-/* X animation (when .barActive is applied) */
 .hamburger .barActive:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -206,7 +205,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ========== Off-Canvas (Mobile Menu) ========== */
 .offCanvas {
   position: fixed;
   top: 0;
@@ -245,7 +243,6 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* Off-canvas menu content */
 .navLinks {
   list-style: none;
   display: flex;
@@ -255,7 +252,7 @@
   height: 100%;
   gap: 6px;
   margin: 0;
-  padding: 40px 0 0; /* leave room for close button */
+  padding: 40px 0 0; 
 }
 
 .navLinks li {
@@ -275,7 +272,7 @@
   color: var(--brand);
 }
 
-/* Exit button row */
+
 .logoutListItem {
   width: 100%;
   display: flex;
@@ -289,7 +286,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1rem; /* daha küçük, tutarlı */
+  font-size: 1rem; 
   color: var(--brand);
   font-weight: 700;
   padding: 8px 6px;
@@ -301,7 +298,7 @@
   background: rgba(214, 90, 0, 0.06);
 }
 
-/* Backdrop */
+
 .backdrop {
   position: fixed;
   inset: 0;
@@ -309,7 +306,7 @@
   z-index: 999;
 }
 
-/* ========== Accessibility Focus States ========== */
+
 .navLink:focus-visible,
 .logoutBtn:focus-visible,
 .closeBtn:focus-visible {
@@ -317,7 +314,7 @@
   outline-offset: 2px;
 }
 
-/* ========== Responsive ========== */
+
 @media (min-width: 1024px) {
   .logoImg {
     height: 64px;
@@ -398,7 +395,6 @@
   }
 }
 
-/* ========== Motion Preferences ========== */
 @media (prefers-reduced-motion: reduce) {
   .logoImg,
   .trendPick,

@@ -1,10 +1,12 @@
+// src/components/Cart.jsx
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styles from "./Cart.module.css";
 import ProductModal from "./ProductModal";
+import { getProductImage } from "../utils/getImage";
 
 export default function Cart({
-  cartItems,
+  cartItems = [],
   onIncrease,
   onDecrease,
   onRemove,
@@ -13,9 +15,14 @@ export default function Cart({
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
+  const totalPrice = useMemo(
+    () =>
+      cartItems.reduce(
+        (total, item) =>
+          total + Number(item.price || 0) * Number(item.quantity || 0),
+        0
+      ),
+    [cartItems]
   );
 
   const handleCheckout = () => {
@@ -28,7 +35,6 @@ export default function Cart({
 
   return (
     <div className={styles.cartBox}>
-      {/* Yeni başlık */}
       <h2
         className={styles.cartTitle}
         style={{
@@ -50,20 +56,24 @@ export default function Cart({
             {cartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <img
-                  src={item.thumbnail}
-                  alt={item.title}
+                  src={getProductImage(item)}
+                  alt={item.title || "product"}
                   className={styles.image}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = "/img/placeholder.png";
+                  }}
                   onClick={() => setSelectedProduct(item)}
                 />
 
                 <div className={styles.info}>
-                  <h4>{item.title}</h4>
+                  <h4 title={item.title}>{item.title}</h4>
 
                   <div className={styles.controls}>
                     <button
                       type="button"
                       className={styles.decrease}
-                      onClick={() => onDecrease(item.id)}
+                      onClick={() => onDecrease?.(item.id)}
                       aria-label={`Decrease quantity of ${item.title}`}
                     >
                       –
@@ -74,19 +84,23 @@ export default function Cart({
                     <button
                       type="button"
                       className={styles.increase}
-                      onClick={() => onIncrease(item.id)}
+                      onClick={() => onIncrease?.(item.id)}
                       aria-label={`Increase quantity of ${item.title}`}
                     >
                       +
                     </button>
 
                     <span className={styles.itemTotal}>
-                      = {(item.price * item.quantity).toFixed(2)} $
+                      ={" "}
+                      {(
+                        Number(item.price || 0) * Number(item.quantity || 0)
+                      ).toFixed(2)}{" "}
+                      $
                     </span>
 
                     <button
                       type="button"
-                      onClick={() => onRemove(item.id)}
+                      onClick={() => onRemove?.(item.id)}
                       aria-label={`Remove ${item.title}`}
                       title="Remove"
                     >
@@ -116,6 +130,7 @@ export default function Cart({
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
+        /* onAddToCart burada görünmesin istiyorsan pas geçmek yeterli */
       />
     </div>
   );

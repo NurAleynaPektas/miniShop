@@ -93,7 +93,6 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
             </li>
           )}
 
-          {/* Tema Düğmesi */}
           <li>
             <button
               type="button"
@@ -111,7 +110,7 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
           </li>
         </ul>
 
-        {/* Mobil Hamburger */}
+       
         <button
           className={styles.hamburger}
           onClick={toggleMenu}
@@ -125,7 +124,7 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
 
       {isLoggedIn && (
         <p className={styles.welcomeUnderLogo}>
-          {/* WELCOME */}
+       
           <span className={styles.word}>
             {"Welcome".split("").map((char, i) => (
               <span key={`w-${i}`} style={{ animationDelay: `${i * 0.05}s` }}>
@@ -134,13 +133,12 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
             ))}
           </span>
 
-          {/* NAME */}
+    
           <span className={styles.word}>
             {firstName.split("").map((char, i) => (
               <span
                 key={`n-${i}`}
                 style={{
-                  // Welcome 7 harf + 1 harflik “duraklama” sonra başlasın
                   animationDelay: `${("Welcome".length + 1 + i) * 0.05}s`,
                 }}
               >
@@ -149,7 +147,7 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
             ))}
           </span>
 
-          {/* EMOJI */}
+       
           <span className={styles.word}>
             <span
               style={{
@@ -244,7 +242,6 @@ export default function Navbar({ isLoggedIn, onLogout, userName }) {
             </>
           )}
 
-          {/* Mobil Tema Düğmesi */}
           <li>
             <button
               type="button"
