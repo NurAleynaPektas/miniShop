@@ -149,6 +149,9 @@ export default function Home({ onAddToCart, setIsLoading }) {
             products={weeklyProducts}
             onSelect={setSelectedProduct}
             isLoading={isPageLoading}
+            autoplay
+            autoplayInterval={2800}
+            pauseOnHover
           />
         </section>
 

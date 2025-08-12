@@ -12,8 +12,6 @@
   position: relative;
 }
 
-
-
 .nav {
   position: absolute;
   top: 50%;
@@ -53,6 +51,7 @@
   padding: 10px 6px 16px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 .track::-webkit-scrollbar {
   height: 0;
@@ -77,6 +76,8 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .card:hover {
   transform: translateY(-2px);
