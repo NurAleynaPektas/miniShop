@@ -59,7 +59,7 @@
 
 .desc {
   font-size: 0.95rem;
-  color: #333;
+  color: var(--muted);
   margin: 8px 0 16px;
 }
 
