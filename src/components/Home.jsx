@@ -108,7 +108,7 @@ export default function Home({ onAddToCart, setIsLoading }) {
       <div className={styles.container}>
         {/* CATEGORIES SECTION */}
         <section id="categoriesSection" className={styles.section}>
-          <h1 className={styles.heading}>🛍️ Shop by Category</h1>
+          <h1 className={styles.heading}>Shop by Category 🛍️</h1>
 
           <div className={styles.controls}>
             {/* Desktop: butonlar */}
@@ -144,7 +144,6 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
         {/* WEEKLY SECTION */}
         <section id="weeklySection" className={styles.section}>
-          <h2 className={styles.heading}>🔥 Products of the Week</h2>
           <WeeklySlider
             products={weeklyProducts}
             onSelect={setSelectedProduct}
@@ -157,7 +156,6 @@ export default function Home({ onAddToCart, setIsLoading }) {
 
         {/* FLASH DEALS SECTION */}
         <section id="flashSection" className={styles.section}>
-          <h2 className={styles.heading}>⚡ Flash Deals</h2>
           <FlashDeals
             products={flashDeals}
             onAdd={handleAdd}

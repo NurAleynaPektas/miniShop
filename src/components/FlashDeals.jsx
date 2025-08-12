@@ -7,7 +7,7 @@ export default function FlashDeals({
   products = [],
   onAdd,
   onSelect,
-  title = "Flash Deals",
+  title = "Flash Deals ",
   note = null,
   isLoading = false,
   limit = 18,
@@ -17,7 +17,7 @@ export default function FlashDeals({
 
   return (
     <div className={styles.container}>
-      {title && <h3 className={styles.titleTop}>{title}</h3>}
+      {title && <h3 className={styles.titleTop}>{title} ⚡</h3>}
       {note && <p className={styles.note}>{note}</p>}
 
       <div className={styles.grid}>

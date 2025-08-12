@@ -8,14 +8,14 @@ export default function WeeklySlider({
   products = [],
   onSelect,
   isLoading = false,
-  title = "🔥 Products of the Week",
-  autoplay = true, 
-  autoplayInterval = 3500, 
-  pauseOnHover = true, 
+  title = " Products of the Week ✨",
+  autoplay = true,
+  autoplayInterval = 3500,
+  pauseOnHover = true,
 }) {
   const trackRef = useRef(null);
   const hoverRef = useRef(false);
-  const userPausedRef = useRef(false); 
+  const userPausedRef = useRef(false);
   const intervalRef = useRef(null);
 
   const [canLeft, setCanLeft] = useState(false);
@@ -52,8 +52,6 @@ export default function WeeklySlider({
     });
   };
 
-
-
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -81,7 +79,7 @@ export default function WeeklySlider({
         } else {
           scrollByCards(1);
         }
-      }, Math.max(1500, autoplayInterval)); 
+      }, Math.max(1500, autoplayInterval));
     };
 
     const stop = () => {
@@ -116,7 +114,6 @@ export default function WeeklySlider({
     window.addEventListener("pointerup", onPointerUp);
     document.addEventListener("visibilitychange", onVisibility);
 
-    
     start();
 
     return () => {
