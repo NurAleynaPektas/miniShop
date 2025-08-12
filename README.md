@@ -1,12 +1,40 @@
-# React + Vite
+# 🛍️ Mini Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Responsive e-commerce demo built with **React + Vite** and deployed on **Vercel**.  
+Features product listing, category filtering, search, quick view modal, and cart management.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+🔗 [View Website](https://mini-shop-lime.vercel.app/) 
+📂 [GitHub Repo](https://github.com/NurAleynaPektas/miniShop)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
+- Responsive & modern UI
+- Browse products with images, prices, and details
+- Category filter & keyword search
+- Quick view modal
+- Add/remove items from cart
+- Toast notifications & loaders
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+- React 18 + Vite
+- React Router
+- CSS Modules
+- react-slick, react-hot-toast, react-loading-skeleton
+- Deployed on Vercel
+
+
+## ⚙️ Run Locally
+```bash
+git clone https://github.com/NurAleynaPektas/miniShop
+cd miniShop
+npm install
+npm run dev
+❤️ Acknowledgments
+Thanks to Burak Sarpkaya, Betül Topkan, and Enes Bayram for their guidance, and to GoIT Türkiye for providing this wonderful course.
+
+👩‍💻 Author: Nur Aleyna Pektaş
+🔗 GitHub: NurAleynaPektas | LinkedIn:(https://www.linkedin.com/in/nur-aleyna-pektas)
