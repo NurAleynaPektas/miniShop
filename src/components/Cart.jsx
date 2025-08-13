@@ -45,7 +45,7 @@ export default function Cart({
           color: "transparent",
         }}
       >
-        Your Cart
+        🧺 Your Cart
       </h2>
 
       {cartItems.length === 0 ? (
@@ -113,7 +113,7 @@ export default function Cart({
           </div>
 
           <div className={styles.totalBox}>
-            <p>
+            <p className={styles.totalText}>
               Amount 🧾 : <strong>{totalPrice.toFixed(2)} $</strong>
             </p>
             <button

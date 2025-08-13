@@ -123,4 +123,7 @@
   .categoryButtons {
     display: none;
   }
+  .heading{
+    font-size: 1.4rem;
+  }
 }

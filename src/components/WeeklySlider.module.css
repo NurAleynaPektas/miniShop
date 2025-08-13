@@ -3,7 +3,7 @@
 }
 
 .title {
-  font-size: 1.50rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 10px;
   animation: fadeInUp 0.6s ease-in-out;
@@ -151,9 +151,12 @@
   font-weight: 700;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 480px) {
   .card {
     width: 160px;
+  }
+  .title {
+    font-size: 1.4rem;
   }
   .cardTitle {
     font-size: 0.9rem;

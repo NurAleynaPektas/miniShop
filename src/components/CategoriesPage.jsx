@@ -55,7 +55,18 @@ export default function CategoriesPage({ onAddToCart, setIsLoading }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.heading}>🛍️ All Categories</h1>
+        <h1
+          className={styles.heading}
+          style={{
+            backgroundImage: "linear-gradient(135deg, #c85000ff, #feb47b)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            color: "transparent",
+          }}
+        >
+          🛍️ All Categories
+        </h1>
 
         {/* Search + (Mobile) Category Select */}
         <div className={styles.searchFilterWrapper}>

@@ -52,7 +52,7 @@
   line-height: 1.2;
 }
 .titleTop {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   animation: fadeInUp 0.6s ease-in-out;
   border-bottom: 2px solid #020202;
 }
@@ -104,7 +104,7 @@
 
 @media screen and (max-width: 480px) {
   .heading {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .card {
